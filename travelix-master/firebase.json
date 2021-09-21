@@ -8,31 +8,38 @@
         ],
         "redirects": [{
                 "source": "/login",
-                "destination": "./login.html"
+                "destination": "./login.html",
+                "type": 301
             },
             {
                 "source": "/about",
-                "destination": "./about.html"
+                "destination": "./about.html",
+                "type": 302
             },
             {
                 "source": "/blog",
-                "destination": "./blog.html"
+                "destination": "./blog.html",
+                "type": 303
             },
             {
                 "source": "/contact",
-                "destination": "./contact.html"
+                "destination": "./contact.html",
+                "type": 304
             },
             {
                 "source": "/index",
-                "destination": "./index.html"
+                "destination": "./index.html",
+                "type": 305
             },
             {
                 "source": "/offers",
-                "destination": "./offers.html"
+                "destination": "./offers.html",
+                "type": 306
             },
             {
                 "source": "/single_listing",
-                "destination": "./single_listing.html"
+                "destination": "./single_listing.html",
+                "type": 307
             }
         ]
     }
