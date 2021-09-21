@@ -6,40 +6,40 @@
             "**/.*",
             "**/node_modules/**"
         ],
-        "redirects": [{
+        "rewrites": [{
                 "source": "/login",
-                "destination": "./login.html",
-                "type": 309
+                "destination": "./login.html"
+
             },
             {
                 "source": "/about",
-                "destination": "./about.html",
-                "type": 302
+                "destination": "./about.html"
+
             },
             {
                 "source": "/blog",
-                "destination": "./blog.html",
-                "type": 303
+                "destination": "./blog.html"
+
             },
             {
                 "source": "/contact",
-                "destination": "./contact.html",
-                "type": 304
+                "destination": "./contact.html"
+
             },
             {
                 "source": "/home",
-                "destination": "./home.html",
-                "type": 305
+                "destination": "./home.html"
+
             },
             {
                 "source": "/offers",
-                "destination": "./offers.html",
-                "type": 306
+                "destination": "./offers.html"
+
             },
             {
                 "source": "/single_listing",
-                "destination": "./single_listing.html",
-                "type": 307
+                "destination": "./single_listing.html"
+
             }
 
         ]
