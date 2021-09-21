@@ -23,6 +23,8 @@
     <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet" />
     <!-- //web font -->
     <link rel="stylesheet" type="text/css" href="styles/login.css" />
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
 </head>
 
 <body>
@@ -47,6 +49,7 @@
                     // if they open the link on the same device.
                     window.localStorage.setItem("emailForSignIn", email.value);
                     console.log("check email");
+                    window.location.assign("../about");
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -108,6 +111,21 @@
         <li></li>
       </ul>
     </div>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyBcRNtWwCuwvIoLEuBgHlT79zvczRtg1ZA",
+        authDomain: "travelproject-3b437.firebaseapp.com",
+        databaseURL: "https://travelproject-3b437-default-rtdb.firebaseio.com",
+        projectId: "travelproject-3b437",
+        storageBucket: "travelproject-3b437.appspot.com",
+        messagingSenderId: "1066359534278",
+        appId: "1:1066359534278:web:580eb5888edff8ade8ddc7",
+        measurementId: "G-M936SJ9ZDQ",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
     <script src="/__/firebase/6.3.1/firebase-app.js"></script>
     <script src="/__/firebase/6.3.1/firebase-auth.js"></script>
     <script src="/__/firebase/init.js?useEmulator=true"></script>
