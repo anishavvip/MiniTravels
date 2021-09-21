@@ -6,7 +6,7 @@
             "**/.*",
             "**/node_modules/**"
         ],
-        "rewrites": [{
+        "redirects": [{
                 "source": "/login",
                 "destination": "./login.html"
             },
