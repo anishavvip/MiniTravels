@@ -9,7 +9,7 @@
         "redirects": [{
                 "source": "/login",
                 "destination": "./login.html",
-                "type": 301
+                "type": 309
             },
             {
                 "source": "/about",
@@ -27,8 +27,8 @@
                 "type": 304
             },
             {
-                "source": "/index",
-                "destination": "./index.html",
+                "source": "/home",
+                "destination": "./home.html",
                 "type": 305
             },
             {
@@ -41,6 +41,7 @@
                 "destination": "./single_listing.html",
                 "type": 307
             }
+
         ]
     }
 }
