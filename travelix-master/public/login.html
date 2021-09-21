@@ -23,45 +23,17 @@
     <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet" />
     <!-- //web font -->
     <link rel="stylesheet" type="text/css" href="styles/login.css" />
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+
+    <!-- <script src="js/firebase1.js"></script> -->
 </head>
 
 <body>
     <!-- main -->
-    <script>
-        let Button_click = () => {
-            let email = document.getElementById("email_m");
-            console.log(email.value);
-            var actionCodeSettings = {
-                // URL you want to redirect back to. The domain (www.example.com) for this
-                // URL must be in the authorized domains list in the Firebase Console.
-                url: "https://travelproject-3b437.web.app/home.html",
-                // This must be true.
-                handleCodeInApp: true,
-            };
-            firebase
-                .auth()
-                .sendSignInLinkToEmail(email.value, actionCodeSettings)
-                .then(() => {
-                    // The link was successfully sent. Inform the user.
-                    // Save the email locally so you don't need to ask the user for it again
-                    // if they open the link on the same device.
-                    window.localStorage.setItem("emailForSignIn", email.value);
-                    console.log("check email");
-                })
-                .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.log(errorCode);
-                    console.log(errorMessage);
-                });
-        };
-    </script>
-    <div class="main-w3layouts wrapper">
-        <div class="main-agileinfo">
-            <div class="agileits-top">
-                <img style="
+    <form class="form-passwordless">
+        <div class="main-w3layouts wrapper">
+            <div class="main-agileinfo">
+                <div class="agileits-top">
+                    <img style="
               height: 15vw;
               width: 15vw;
               left: 8vw;
@@ -69,24 +41,24 @@
               position: relative;
             " src="images/email-13776.png" />
 
-                <p style="
+                    <p style="
               justify-content: center;
               font-weight: bolder;
               font-size: x-large;
             ">
-                    Want an easier way to login?
-                </p>
-                <br />
+                        Want an easier way to login?
+                    </p>
+                    <br />
 
-                <p style="justify-content: center">
-                    Get a magic link sent to your email that will
-                </p>
-                <p style="justify-content: center">sign you instantly!</p>
+                    <p style="justify-content: center">
+                        Get a magic link sent to your email that will
+                    </p>
+                    <p style="justify-content: center">sign you instantly!</p>
 
-                <input class="text email" type="email" id="email_m" name="email" placeholder="Email" required="" />
+                    <input class="text email" type="email" id="email_m" name="email" placeholder="Email" required="" />
 
-                <div style="left: 5.5vw; position: relative">
-                    <a href="#" id="Magic-link-button" onclick="Button_click()" class="button4" style="
+                    <div style="left: 5.5vw; position: relative">
+                        <a href="#" id="Magic-link-button" onclick="Button_click()" class="button4" style="
                 font-weight: bold;
                 letter-spacing: 2px;
                 font-size: x-large;
@@ -96,7 +68,7 @@
           </div>
         </div>
       </div>
-
+    </form>
       <ul class="colorlib-bubbles">
         <li></li>
         <li></li>
@@ -110,9 +82,68 @@
         <li></li>
       </ul>
     </div>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+      <script>
+        let Button_click = () => {
+            console.log("button clicked");
+            let inputEmail = document.getElementById('email_m');
+            console.log(inputEmail.value);
+            
+            var actionCodeSettings = {
+                // URL you want to redirect back to. The domain (www.example.com) for this
+                // URL must be in the authorized domains list in the Firebase Console.
+                url: `${location.origin}/home`,
+                // This must be true.
+                handleCodeInApp: true,
+            };
+            firebase
+                .auth()
+                .sendSignInLinkToEmail(inputEmail.value, actionCodeSettings)
+                .then(() => {
+                    // The link was successfully sent. Inform the user.
+                    // Save the email locally so you don't need to ask the user for it again
+                    // if they open the link on the same device.
+                    window.localStorage.setItem("emailForSignIn", inputEmail.value);
+                    console.log("check email");
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.log(errorCode);
+                    console.log(errorMessage);
+                });
+                // need to make this functional
+                firebase.database().ref(`users/email`).once("value", snapshot => {
+                if (snapshot.exists()){
+                    console.log("exists!");
+                    const email = snapshot.val();
+                    console.log(email)
+                }
+                else{
+                    firebasePush(inputEmail);
+                    return alert('Data Successfully Sent to Realtime Database');
+                  }
+              });
+            
+        }
 
-    <script src="/__/firebase/6.3.1/firebase-app.js"></script>
+        //create a functions to push
+        function firebasePush(input) {
+            console.log("email pushed");
+            //push itself
+            var mailsRef = firebase.database().ref('user').push().set({
+                email: input.value
+            });
+            console.log(mailsRef);
+        }
+    </script>
+
+    <script src="/__/firebase/6.3.1/firebase.js"></script>
     <script src="/__/firebase/6.3.1/firebase-auth.js"></script>
     <script src="/__/firebase/init.js?useEmulator=true"></script>
+    
   </body>
 </html>
