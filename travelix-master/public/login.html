@@ -116,11 +116,14 @@
                     console.log(errorMessage);
                 });
                 // need to make this functional
-                firebase.database().ref(`users/email`).once("value", snapshot => {
+                // firebase.database().ref(`users/email`).once("value", snapshot => 
+                var ref = firebase.database().ref("user");
+                ref.orderByChild("email").equalTo(inputEmail.value).on("child_added", function(snapshot){
                 if (snapshot.exists()){
                     console.log("exists!");
                     const email = snapshot.val();
                     console.log(email)
+                    return alert('Data already exists in Realtime Database');
                 }
                 else{
                     firebasePush(inputEmail);
