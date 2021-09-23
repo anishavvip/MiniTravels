@@ -31,9 +31,20 @@
                 "destination": "./home.html"
 
             },
+
             {
-                "source": "/offers",
-                "destination": "./offers.html"
+                "source": "/car_rentals",
+                "destination": "./car_rentals.html"
+
+            },
+            {
+                "source": "/hotels",
+                "destination": "./hotels.html"
+
+            },
+            {
+                "source": "/trips",
+                "destination": "./trips.html"
 
             },
             {

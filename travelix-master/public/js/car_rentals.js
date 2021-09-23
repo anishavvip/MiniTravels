@@ -40,7 +40,7 @@ $(document).ready(function() {
     });
 
     initMenu();
-    initIsotopeFiltering();
+    // initIsotopeFiltering();
     initSearch();
     initMoreOptions();
     initSearchForm();
@@ -111,58 +111,6 @@ $(document).ready(function() {
         menuActive = false;
     }
 
-    /* 
-
-    4. Init Isotope Filtering
-
-    */
-
-    function initIsotopeFiltering() {
-        var sortBtn = $('.sort_btn');
-        var filterBtn = $('.filter_btn');
-
-        if ($('.offers_grid').length) {
-            var grid = $('.offers_grid').isotope({
-                itemSelector: '.offers_item',
-                getSortData: {
-                    price: function(itemElement) {
-                        var priceEle = $(itemElement).find('.offers_price').text().replace('$', '');
-                        return parseFloat(priceEle);
-                    },
-                    name: '.offer_name',
-                    stars: function(itemElement) {
-                        var starsEle = $(itemElement).find('.offers_rating');
-                        var stars = starsEle.attr("data-rating");
-                        return stars;
-                    }
-                },
-                animationOptions: {
-                    duration: 750,
-                    easing: 'linear',
-                    queue: false
-                }
-            });
-
-            // Sorting
-            sortBtn.each(function() {
-                $(this).on('click', function() {
-                    var parent = $(this).parent().parent().find('.sorting_text');
-                    parent.text($(this).text());
-                    var option = $(this).attr('data-isotope-option');
-                    option = JSON.parse(option);
-                    grid.isotope(option);
-                });
-            });
-
-            // Filtering
-            $('.filter_btn').on('click', function() {
-                var parent = $(this).parent().parent().find('.sorting_text');
-                parent.text($(this).text());
-                var filterValue = $(this).attr('data-filter');
-                grid.isotope({ filter: filterValue });
-            });
-        }
-    }
 
     /* 
 
@@ -173,17 +121,10 @@ $(document).ready(function() {
     function initSearch() {
         var panels = $('.search_panel');
         $(panels[0]).addClass('active');
-        if ($('.search_tab').length) {
-            $('.search_tab').on('click', function() {
-                $('.search_tab').removeClass('active');
-                $(this).addClass('active');
-                var clickedIndex = $('.search_tab').index(this);
+        $('.search_tab').removeClass('active');
+        var search_panels = $('.search_tab');
+        $(search_panels[1]).addClass('active');
 
-                var panels = $('.search_panel');
-                panels.removeClass('active');
-                $(panels[clickedIndex]).addClass('active');
-            });
-        }
     }
 
     /* 
