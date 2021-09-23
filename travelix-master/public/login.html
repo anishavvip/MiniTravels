@@ -29,7 +29,7 @@
 
 <body>
     <!-- main -->
-    <form class="form-passwordless">
+    <form id="form-passwordless">
         <div class="main-w3layouts wrapper">
             <div class="main-agileinfo">
                 <div class="agileits-top">
@@ -99,6 +99,7 @@ to avoid connecting the SDK to running emulators.
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
       <script>
+        
         let Button_click = () => {
             console.log("button clicked");
             let inputEmail = document.getElementById('email_m');
@@ -120,6 +121,10 @@ to avoid connecting the SDK to running emulators.
                     // if they open the link on the same device.
                     window.localStorage.setItem("emailForSignIn", inputEmail.value);
                     console.log("check email");
+                    //firestore reading
+                    read4firestore(inputEmail);
+                    
+                   
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -127,33 +132,18 @@ to avoid connecting the SDK to running emulators.
                     console.log(errorCode);
                     console.log(errorMessage);
                 });
-                // need to make this functional
-                
-                var ref = firebase.database().ref("user");
-                ref.orderByChild("email").equalTo(inputEmail.value).on("child_added", function(snapshot){
-                if (snapshot.exists()){
-                    console.log("exists!");
-                    const email = snapshot.val();
-                    console.log(email)
-                    return alert('Data already exists in Realtime Database');
-                }
-                else{
-                    firebasePush(inputEmail);
-                    return alert('Data Successfully Sent to Realtime Database');
-                  }
-              });
+         
             
         }
-
-        //create a functions to push
-        function firebasePush(input) {
-            console.log("email pushed");
-            //push itself
-            var mailsRef = firebase.database().ref('user').push().set({
-                email: input.value
-            });
-            console.log(mailsRef);
+        function read4firestore(inputEmail){
+          var db = firebase.firestore();
+          db.collection("Users").doc(inputEmail.value).set({
+            Email: inputEmail.value,
+              
+          })
+    
         }
+       
     </script>
 
     
