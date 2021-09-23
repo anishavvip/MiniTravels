@@ -322,16 +322,16 @@
                                             <span class="sorting_text">price</span>
                                             <i class="fa fa-chevron-down"></i>
                                             <ul>
-                                                <li class="sort_btn" id="all_price">
+                                                <li class="sort_btn" onclick="readall()" id="all_price">
                                                     <span>show all</span>
                                                 </li>
-                                                <li class="sort_btn" id="price_ascending">
+                                                <li class="sort_btn" onclick="asc_sort_price()" id="price_ascending">
                                                     <span>ascending</span>
                                                 </li>
-                                                <li class="sort_btn" id="2k_4k">
+                                                <li class="sort_btn" onclick="range2_4_price()" id="2k_4k">
                                                     <span>2000 - 4000</span>
                                                 </li>
-                                                <li class="sort_btn" i="4k+">
+                                                <li class="sort_btn" onclick="price44()" i="4k+">
                                                     <span>> 4000</span>
                                                 </li>
                                             </ul>
@@ -340,13 +340,13 @@
                                             <span class="sorting_text">bags</span>
                                             <i class="fa fa-chevron-down"></i>
                                             <ul>
-                                                <li class="sort_btn" id="all_bags">
+                                                <li class="sort_btn" onclick="readall()" id="all_bags">
                                                     <span>show all</span>
                                                 </li>
-                                                <li class="sort_btn" id="1_2">
+                                                <li class="sort_btn" onclick="range1_2_bags()" id="1_2">
                                                     <span>1 to 2</span>
                                                 </li>
-                                                <li class="sort_btn" id="3_4">
+                                                <li class="sort_btn" onclick="range3_4_bags()" id="3_4">
                                                     <span>3 to 4</span>
                                                 </li>
                                             </ul>
@@ -355,13 +355,13 @@
                                             <span class="sorting_text">passengers</span>
                                             <i class="fa fa-chevron-down"></i>
                                             <ul>
-                                                <li class="sort_btn" id="all_bags">
+                                                <li class="sort_btn" onclick="readall()" id="all_bags">
                                                     <span>show all</span>
                                                 </li>
-                                                <li class="sort_btn" id="3_5">
+                                                <li class="sort_btn" onclick="range3_5_seats()" id="3_5">
                                                     <span>3 to 5</span>
                                                 </li>
-                                                <li class="sort_btn" id="6+">
+                                                <li class="sort_btn" onclick="seats66()" id="6+">
                                                     <span>6 or more</span>
                                                 </li>
 
@@ -371,16 +371,16 @@
                                             <span class="sorting_text">car type</span>
                                             <i class="fa fa-chevron-down"></i>
                                             <ul>
-                                                <li class="sort_btn" id="all_car_types">
+                                                <li class="sort_btn" onclick="readall()" id="all_car_types">
                                                     <span>show all</span>
                                                 </li>
-                                                <li class="sort_btn" id="S_L">
+                                                <li class="sort_btn" onclick="s_l()" id="S_L">
                                                     <span>small-large</span>
                                                 </li>
-                                                <li class="sort_btn" id="SUV">
+                                                <li class="sort_btn" onclick="suv()" id="SUV">
                                                     <span>SUV</span>
                                                 </li>
-                                                <li class="sort_btn" id="van">
+                                                <li class="sort_btn" onclick="van_type()" id="van">
                                                     <span>van</span>
                                                 </li>
                                             </ul>
@@ -676,9 +676,9 @@
         <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
         <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js"></script>
         <!-- update the version number as needed -->
-        <script src="/__/firebase/6.3.1/firebase.js"></script>
+        <script src="/__/firebase/7.21.0/firebase.js"></script>
         <!-- include only the Firebase features as you need -->
-        <script src="/__/firebase/6.3.1/firebase-auth.js"></script>
+        <script src="/__/firebase/7.21.0/firebase-auth.js"></script>
         <!-- 
   initialize the SDK after all desired features are loaded, set useEmulator to false
   to avoid connecting the SDK to running emulators.
@@ -693,21 +693,124 @@
                 var trip_out = document.getElementById("trip_checkout").value;
                 var adult = document.getElementById("adults").value;
                 var child = document.getElementById("children").value;
-
+                var sum = parseInt(child) + parseInt(adult)
                 console.log(
-                    trip_dest + " " + trip_in + " " + trip_out + " " + adult + " " + child
+                    sum
                 );
-                read();
+                readall();
+                search_res(sum);
+
 
             }
 
-            function read() {
+            function search_res(sum) {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Adults", ">=", sum).get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                })
+            }
+
+            function readall() {
                 var db = firebase.firestore();
                 db.collection('Car rentals').get().then((snapshot) => {
                     snapshot.forEach(doc => {
                         console.log(doc.data())
                     })
                 })
+            }
+
+            function asc_sort_price() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").orderBy("Cost").get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
+
+            }
+
+            function range2_4_price() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Cost", ">=", 2000).where("Cost", "<=", 4000).orderBy("Cost").get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
+            }
+
+            function price44() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Cost", ">=", 4000).orderBy("Cost").get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
+
+            }
+
+            function range1_2_bags() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Bags", ">=", 1).where("Bags", "<=", 2).orderBy("Bags").get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
+            }
+
+            function range3_4_bags() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Bags", ">=", 3).where("Bags", "<=", 4).orderBy("Bags").get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
+            }
+
+            function range3_5_seats() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Adults", ">=", 3).where("Adults", "<=", 5).orderBy("Adults").get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
+            }
+
+            function seats66() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Adults", ">=", 6).orderBy("Adults").get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
+            }
+
+            function s_l() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Type", "not-in", ["Premium SUV", "Full-size SUV", "Minivan", "Passenger van"]).get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
+            }
+
+            function suv() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Type", "in", ["Premium SUV", "Full-size SUV"]).get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
+            }
+
+            function van_type() {
+                var db = firebase.firestore();
+                db.collection("Car rentals").where("Type", "in", ["Minivan", "Passenger van"]).get().then((snapshot) => {
+                    snapshot.forEach(doc => {
+                        console.log(doc.data())
+                    })
+                });
             }
             $("#search_form_1").submit(function(e) {
                 e.preventDefault();
