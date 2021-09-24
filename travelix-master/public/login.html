@@ -137,15 +137,9 @@ to avoid connecting the SDK to running emulators.
         }
         function read4firestore(inputEmail){
           var db = firebase.firestore();
-          db.collection("Users").doc(inputEmail.value).set({
-            Email: inputEmail.value,
-              
-          })
-    
+          db.collection("Users").doc(inputEmail.value).set({Userdetails:{Email: inputEmail.value}},{merge:true});
         }
        
     </script>
-
-    
   </body>
 </html>
