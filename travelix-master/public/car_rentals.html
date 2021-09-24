@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body onload=" readall()">
     <div class="super_container">
         <!-- Header -->
 
@@ -636,13 +636,13 @@
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <script>
-        var el = document.getElementById("results");
-        var car_rentals = "";
+        var global_counter = 0;
 
-        function create_ele() {
-            var figure = document.createElement("div");
-            figure.setAttribute("id", "results");
-
+        function del_ele() {
+            var div = "getter";
+            var d = document.getElementById("results");
+            var olddiv = document.getElementById(div);
+            d.removeChild(olddiv);
         }
 
         function search() {
@@ -659,17 +659,14 @@
 
             search_res(sum);
         }
-        var global_counter = 0;
-        var el = document.getElementById("results");
 
 
         function search_res(sum) {
-            if (global_counter > 0) {
-                el.remove();
+            if (global_counter == 1) {
+                del_ele();
                 global_counter = 0;
-            } else {
-                create_ele();
             }
+
             console.log(global_counter)
             var db = firebase.firestore();
             db.collection("Car rentals").where("Adults", ">=", sum).orderBy("Adults").get().then((snapshot) => {
@@ -680,11 +677,9 @@
 
 
         function readall() {
-            if (global_counter > 0) {
-                el.remove();
+            if (global_counter == 1) {
+                del_ele();
                 global_counter = 0;
-            } else {
-                create_ele();
             }
             var db = firebase.firestore();
             db.collection('Car rentals').get().then((snapshot) => {
@@ -696,11 +691,9 @@
 
 
         function asc_sort_price() {
-            if (global_counter > 0) {
-                el.remove();
+            if (global_counter == 1) {
+                del_ele();
                 global_counter = 0;
-            } else {
-                create_ele();
             }
             var db = firebase.firestore();
             db.collection("Car rentals").orderBy("Cost").get().then((snapshot) => {
@@ -711,11 +704,9 @@
 
 
         function range2_4_price() {
-            if (global_counter > 0) {
-                el.remove();
+            if (global_counter == 1) {
+                del_ele();
                 global_counter = 0;
-            } else {
-                create_ele();
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Cost", ">=", 2000).where("Cost", "<=", 4000).orderBy("Cost").get().then((snapshot) => {
@@ -725,77 +716,101 @@
         }
 
         function price44() {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Cost", ">=", 4000).orderBy("Cost").get().then((snapshot) => {
-                snapshot.forEach(doc => {
-                    getinfo(snapshot.docs, snapshot);
-                })
+                getinfo(snapshot.docs, snapshot);
             });
-
+            global_counter = 1;
         }
 
         function range1_2_bags() {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Bags", ">=", 1).where("Bags", "<=", 2).orderBy("Bags").get().then((snapshot) => {
-                snapshot.forEach(doc => {
-                    getinfo(snapshot.docs, snapshot);
-                })
+                getinfo(snapshot.docs, snapshot);
             });
+            global_counter = 1;
         }
 
         function range3_4_bags() {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Bags", ">=", 3).where("Bags", "<=", 4).orderBy("Bags").get().then((snapshot) => {
-                snapshot.forEach(doc => {
-                    getinfo(snapshot.docs, snapshot);
-                })
+                getinfo(snapshot.docs, snapshot);
             });
+            global_counter = 1;
         }
 
         function range3_5_seats() {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Adults", ">=", 3).where("Adults", "<=", 5).orderBy("Adults").get().then((snapshot) => {
-                snapshot.forEach(doc => {
-                    getinfo(snapshot.docs, snapshot);
-                })
+                getinfo(snapshot.docs, snapshot);
             });
+            global_counter = 1;
         }
 
         function seats66() {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Adults", ">=", 6).orderBy("Adults").get().then((snapshot) => {
-                snapshot.forEach(doc => {
-                    getinfo(snapshot.docs, snapshot);
-                })
+                getinfo(snapshot.docs, snapshot);
             });
+            global_counter = 1;
         }
 
         function s_l() {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Type", "not-in", ["Premium SUV", "Full-size SUV", "Minivan", "Passenger van"]).get().then((snapshot) => {
-                snapshot.forEach(doc => {
-                    getinfo(snapshot.docs, snapshot);
-                })
+                getinfo(snapshot.docs, snapshot);
             });
+            global_counter = 1;
         }
 
         function suv() {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Type", "in", ["Premium SUV", "Full-size SUV"]).get().then((snapshot) => {
-                snapshot.forEach(doc => {
-                    getinfo(snapshot.docs, snapshot);
-                })
+                getinfo(snapshot.docs, snapshot);
             });
+            global_counter = 1;
         }
 
         function van_type() {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Type", "in", ["Minivan", "Passenger van"]).get().then((snapshot) => {
-                snapshot.forEach(doc => {
-                    getinfo(snapshot.docs, snapshot);
-                })
+                getinfo(snapshot.docs, snapshot);
             });
+            global_counter = 1;
         }
+
         $("#search_form_1").submit(function(e) {
             e.preventDefault();
             search();
@@ -805,7 +820,10 @@
 
 
         function getinfo(data, snaps) {
-            var counter = 0;
+            var car_rentals = "";
+            var d = document.createElement("div");
+            d.setAttribute("id", "getter");
+            document.getElementById("results").appendChild(d);
             console.log(snaps.size);
             for (let i = 0; i < snaps.size; i++) {
                 var info = data[i].data();
@@ -864,8 +882,8 @@
                 car_rentals += " </div></div></div></div></div></div>";
 
             }
-            el.innerHTML = car_rentals;
-            counter += 1;
+            d.innerHTML = car_rentals;
+
         }
     </script>
 
