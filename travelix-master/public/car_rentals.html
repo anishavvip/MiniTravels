@@ -648,10 +648,10 @@
         var global_counter = 0;
         var sum = 0;
 
-        function intersect(arr1, arr2, len1) {
+        function intersect(arr1, arr2) {
             var results = [];
 
-            for (var i = 0; i < len1; i++) {
+            for (var i = 0; i < arr1.length; i++) {
                 if (arr2.indexOf(arr1[i]) !== -1) {
                     results.push(arr1[i]);
                 }
@@ -664,7 +664,7 @@
             var olddiv = document.getElementById("getter");
             d.removeChild(olddiv);
         }
-
+        var sum = 0;
 
         function search() {
             console.log("searching for data");
@@ -681,7 +681,6 @@
             search_res(sum);
 
         }
-
 
 
         function search_res(sum) {
@@ -793,6 +792,7 @@
             }
             global_counter = 1;
         }
+        var array2 = [];
 
         function range2_4_price() {
             if (global_counter == 1) {
@@ -801,9 +801,17 @@
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Cost", ">=", 2000).where("Cost", "<=", 4000).orderBy("Cost").get().then((snapshot) => {
-                getinfo(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Adults >= sum) {
+                        array2.push(grp.data());
+                    }
+                }))
             });
+            // console.log(array2)
+            getinfo1(array2);
             global_counter = 1;
+            array2.length = 0
+
         }
 
 
@@ -814,9 +822,17 @@
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Cost", ">=", 4000).orderBy("Cost").get().then((snapshot) => {
-                getinfo(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Adults >= sum) {
+                        array2.push(grp.data());
+                    }
+                }))
             });
+            // console.log(array2)
+            getinfo1(array2);
             global_counter = 1;
+            array2.length = 0
+
         }
 
         function range1_2_bags() {
@@ -826,9 +842,17 @@
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Bags", ">=", 1).where("Bags", "<=", 2).orderBy("Bags").get().then((snapshot) => {
-                getinfo(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Adults >= sum) {
+                        array2.push(grp.data());
+                    }
+                }))
             });
+            // console.log(array2)
+            getinfo1(array2);
             global_counter = 1;
+            array2.length = 0
+
         }
 
         function range3_4_bags() {
@@ -838,9 +862,17 @@
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Bags", ">=", 3).where("Bags", "<=", 4).orderBy("Bags").get().then((snapshot) => {
-                getinfo(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Adults >= sum) {
+                        array2.push(grp.data());
+                    }
+                }))
             });
+            // console.log(array2)
+            getinfo1(array2);
             global_counter = 1;
+            array2.length = 0
+
         }
 
         function range3_5_seats() {
@@ -850,9 +882,17 @@
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Adults", ">=", 3).where("Adults", "<=", 5).orderBy("Adults").get().then((snapshot) => {
-                getinfo(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Adults >= sum) {
+                        array2.push(grp.data());
+                    }
+                }))
             });
+            // console.log(array2)
+            getinfo1(array2);
             global_counter = 1;
+            array2.length = 0
+
         }
 
         function seats66() {
@@ -862,9 +902,17 @@
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Adults", ">=", 6).orderBy("Adults").get().then((snapshot) => {
-                getinfo(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Adults >= sum) {
+                        array2.push(grp.data());
+                    }
+                }))
             });
+            // console.log(array2)
+            getinfo1(array2);
             global_counter = 1;
+            array2.length = 0
+
         }
 
         function s_l() {
@@ -874,9 +922,17 @@
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Type", "not-in", ["Premium SUV", "Full-size SUV", "Minivan", "Passenger van"]).get().then((snapshot) => {
-                getinfo(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Adults >= sum) {
+                        array2.push(grp.data());
+                    }
+                }))
             });
+            // console.log(array2)
+            getinfo1(array2);
             global_counter = 1;
+            array2.length = 0
+
         }
 
         function suv() {
@@ -886,9 +942,17 @@
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Type", "in", ["Premium SUV", "Full-size SUV"]).get().then((snapshot) => {
-                getinfo(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Adults >= sum) {
+                        array2.push(grp.data());
+                    }
+                }))
             });
+            // console.log(array2)
+            getinfo1(array2);
             global_counter = 1;
+            array2.length = 0
+
         }
 
         function van_type() {
@@ -898,9 +962,17 @@
             }
             var db = firebase.firestore();
             db.collection("Car rentals").where("Type", "in", ["Minivan", "Passenger van"]).get().then((snapshot) => {
-                getinfo(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Adults >= sum) {
+                        array2.push(grp.data());
+                    }
+                }))
             });
+            // console.log(array2)
+            getinfo1(array2);
             global_counter = 1;
+            array2.length = 0
+
         }
 
 
@@ -908,6 +980,71 @@
             e.preventDefault();
             search();
         });
+
+        function getinfo1(data) {
+            var car_rentals = "";
+            var d = document.createElement("div");
+            d.setAttribute("id", "getter");
+            document.getElementById("results").appendChild(d);
+            for (let i = 0; i < data.length; i++) {
+                var info = data[i];
+                console.log("bye", info);
+                car_rentals += "<div id='offers_grid' class='offers_grid'>";
+                car_rentals += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 350px;padding: 10px;box-shadow: 5px 10px 18px #888888;'>"; //div2
+                car_rentals += "<div class='offers_item rating_4'style='color: black'>";
+                car_rentals += "<div class='row'>";
+                car_rentals += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
+                // car_rentals += "<div class='offers_image_container' style='top:4vw; left:2vw;'>";
+                // //modification for image
+                // car_rentals += " <img id='main_img' style='width:300px;height:200px;' alt=''";
+                // // car_rentals += img.setAttribute("src", info.Image);
+                // car_rentals += "/>";
+                // car_rentals += " </div>";
+                car_rentals += "</div";
+                car_rentals += "<div class='col-lg-8' style='top:1.5vw'>";
+                car_rentals += "<div class='offers_content'>";
+                car_rentals += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
+                car_rentals += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
+                car_rentals += info['Cost'];
+                car_rentals += "<span style='color: black'>per day </span>";
+                car_rentals += " </div>";
+                car_rentals += "<br>";
+                car_rentals += "<h2 id='name' style='color:grey'><b>";
+                car_rentals += info['Car'];
+                car_rentals += "</b></h2>";
+                car_rentals += "<h4 id='description'>";
+                car_rentals += info['Type'];
+                car_rentals += "</h4>";
+                car_rentals += "<ul class='offers_icons_list'>";
+                car_rentals += " <li class='offers_icons_item'>";
+                car_rentals += "<img style='width:20px;height:20px;' src='images/snowflake.png' alt='' />";
+                car_rentals += " <p style='display: inline;color:black'> Air Conditioning</p>";
+                car_rentals += "</li>";
+                car_rentals += "<li class='offers_icons_item'>";
+                car_rentals += "<img style='width:20px; height:20px;' src='images/manual-transmission-car.png' alt=''' />";
+                car_rentals += "<p style='display: inline;color:black'> Manual gearbox</p>";
+                car_rentals += "</li>";
+                car_rentals += "<li class='offers_icons_item'>";
+                car_rentals += "<img style='width:20px; height:20px;' src='images/default-avatar.png' alt=''' />";
+                car_rentals += "<p style='display: inline;color:black'>";
+                car_rentals += info['Adults'] + " Adults </p>";
+                car_rentals += "</li>";
+                car_rentals += "<li class='offers_icons_item'>";
+                car_rentals += "<img style='width:20px; height:20px;' src='images/2430422.png' alt=''' />";
+                car_rentals += "<p style='display: inline;color:black'>";
+                car_rentals += info['Bags'] + " Bags </p>";
+                car_rentals += "</li>";
+                car_rentals += "</ul>" + "<hr>";
+                car_rentals += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
+                car_rentals += "<h6 style='color:#fa9e1b'>You'll only pay if you arrive for your reservation</h6>";
+                car_rentals += "<div class='button book_button' style='top:-1.5vw'>";
+                car_rentals += " <a href='#''>book<span></span><span></span><span></span></a>";
+                car_rentals += " </div></div></div></div></div></div>";
+
+            }
+            d.innerHTML = car_rentals;
+
+        }
 
         function getinfo(data, snaps) {
             var car_rentals = "";
