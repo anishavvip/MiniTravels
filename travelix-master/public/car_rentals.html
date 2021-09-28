@@ -407,6 +407,7 @@
                                 <div id="results"></div>
                             </div>
                             <!--End of offers item  -->
+
                         </div>
                     </div>
                 </div>
@@ -994,15 +995,13 @@
                 car_rentals += "<div class='offers_item rating_4'style='color: black'>";
                 car_rentals += "<div class='row'>";
                 car_rentals += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
-                // car_rentals += "<div class='offers_image_container' style='top:4vw; left:2vw;'>";
-                // //modification for image
-                // car_rentals += " <img id='main_img' style='width:300px;height:200px;' alt=''";
-                // // car_rentals += img.setAttribute("src", info.Image);
-                // car_rentals += "/>";
-                // car_rentals += " </div>";
+                car_rentals += "<div class='offers_image_container' style='top:4vw; left:2vw; width:60vw'>";
+                //modification for image
+                car_rentals += " <img id='main_img' style='width:300px;height:200px;' alt='' src=' " + info['Image'] + "' />";
+                car_rentals += " </div>";
                 car_rentals += "</div";
-                car_rentals += "<div class='col-lg-8' style='top:1.5vw'>";
-                car_rentals += "<div class='offers_content'>";
+                car_rentals += "<div class='col-lg-8' style='top:1.5vw;'>";
+                car_rentals += "<div class='offers_content' style='top:-33vw;left:25vw;width:40vw;'>";
                 car_rentals += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
                 car_rentals += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
                 car_rentals += info['Cost'];
@@ -1050,7 +1049,11 @@
             var car_rentals = "";
             var d = document.createElement("div");
             d.setAttribute("id", "getter");
+
             document.getElementById("results").appendChild(d);
+
+
+
             console.log(snaps);
 
             for (let i = 0; i < snaps; i++) {
@@ -1061,15 +1064,13 @@
                 car_rentals += "<div class='offers_item rating_4'style='color: black'>";
                 car_rentals += "<div class='row'>";
                 car_rentals += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
-                // car_rentals += "<div class='offers_image_container' style='top:4vw; left:2vw;'>";
-                // //modification for image
-                // car_rentals += " <img id='main_img' style='width:300px;height:200px;' alt=''";
-                // // car_rentals += img.setAttribute("src", info.Image);
-                // car_rentals += "/>";
-                // car_rentals += " </div>";
+                car_rentals += "<div class='offers_image_container' style='top:4vw; left:2vw; width:60vw'>";
+                //modification for image
+                car_rentals += " <img id='main_img' style='width:300px;height:200px;' alt='' src=' " + info.Image + "' />";
+                car_rentals += " </div>";
                 car_rentals += "</div";
-                car_rentals += "<div class='col-lg-8' style='top:1.5vw'>";
-                car_rentals += "<div class='offers_content'>";
+                car_rentals += "<div class='col-lg-8' style='top:1.5vw;'>";
+                car_rentals += "<div class='offers_content' style='top:-33vw;left:25vw;width:40vw;'>";
                 car_rentals += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
                 car_rentals += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
                 car_rentals += info.Cost;
@@ -1082,28 +1083,35 @@
                 car_rentals += "<h4 id='description'>";
                 car_rentals += info.Type;
                 car_rentals += "</h4>";
-                car_rentals += "<ul class='offers_icons_list'>";
-                car_rentals += " <li class='offers_icons_item'>";
+
+                car_rentals += "<ul class='offers_icons_list' style='display:inline'>";
+
+                car_rentals += " <li class='offers_icons_item' style='display:inline'>";
                 car_rentals += "<img style='width:20px;height:20px;' src='images/snowflake.png' alt='' />";
                 car_rentals += " <p style='display: inline;color:black'> Air Conditioning</p>";
                 car_rentals += "</li>";
-                car_rentals += "<li class='offers_icons_item'>";
+
+                car_rentals += "<li class='offers_icons_item' style='display:inline'>";
                 car_rentals += "<img style='width:20px; height:20px;' src='images/manual-transmission-car.png' alt=''' />";
                 car_rentals += "<p style='display: inline;color:black'> Manual gearbox</p>";
                 car_rentals += "</li>";
-                car_rentals += "<li class='offers_icons_item'>";
+
+                car_rentals += "<li class='offers_icons_item' style='display:inline'>";
                 car_rentals += "<img style='width:20px; height:20px;' src='images/default-avatar.png' alt=''' />";
                 car_rentals += "<p style='display: inline;color:black'>";
                 car_rentals += info.Adults + " Adults </p>";
                 car_rentals += "</li>";
-                car_rentals += "<li class='offers_icons_item'>";
+
+                car_rentals += "<li class='offers_icons_item' style='display:inline'>";
                 car_rentals += "<img style='width:20px; height:20px;' src='images/2430422.png' alt=''' />";
                 car_rentals += "<p style='display: inline;color:black'>";
                 car_rentals += info.Bags + " Bags </p>";
                 car_rentals += "</li>";
+
                 car_rentals += "</ul>" + "<hr>";
+
                 car_rentals += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
-                car_rentals += "<h6 style='color:#fa9e1b'>You'll only pay if you arrive for your reservation</h6>";
+                car_rentals += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
                 car_rentals += "<div class='button book_button' style='top:-1.5vw'>";
                 car_rentals += " <a href='#''>book<span></span><span></span><span></span></a>";
                 car_rentals += " </div></div></div></div></div></div>";
@@ -1116,5 +1124,7 @@
     </script>
 
 </body>
+
+</html>
 
 </html>
