@@ -16,7 +16,7 @@
 
 </head>
 
-<body onload=" readall()">
+<body onload="readall();rest()">
     <div class="super_container">
         <!-- Header -->
 
@@ -662,9 +662,9 @@
 
         function del_ele() {
             var d = document.getElementById("results");
-            var olddiv = document.getElementById("getter");
-            d.removeChild(olddiv);
+            d.innerHTML = ""
         }
+
         var sum = 0;
 
         function search() {
@@ -836,6 +836,7 @@
 
         }
 
+
         function range1_2_bags() {
             if (global_counter == 1) {
                 del_ele();
@@ -855,6 +856,8 @@
             array2.length = 0
 
         }
+
+
 
         function range3_4_bags() {
             if (global_counter == 1) {
@@ -876,6 +879,8 @@
 
         }
 
+
+
         function range3_5_seats() {
             if (global_counter == 1) {
                 del_ele();
@@ -895,6 +900,7 @@
             array2.length = 0
 
         }
+
 
         function seats66() {
             if (global_counter == 1) {
@@ -916,6 +922,7 @@
 
         }
 
+
         function s_l() {
             if (global_counter == 1) {
                 del_ele();
@@ -935,6 +942,7 @@
             array2.length = 0
 
         }
+
 
         function suv() {
             if (global_counter == 1) {
@@ -956,24 +964,40 @@
 
         }
 
+
         function van_type() {
+
             if (global_counter == 1) {
                 del_ele();
                 global_counter = 0;
             }
+
             var db = firebase.firestore();
             db.collection("Car rentals").where("Type", "in", ["Minivan", "Passenger van"]).get().then((snapshot) => {
                 return Promise.all(snapshot.docs.map(grp => {
                     if (grp.data().Adults >= sum) {
                         array2.push(grp.data());
                     }
+
                 }))
             });
-            // console.log(array2)
+
             getinfo1(array2);
             global_counter = 1;
             array2.length = 0
 
+        }
+
+        function rest() {
+            van_type()
+            suv()
+            s_l()
+            seats66()
+            range3_5_seats()
+            range3_4_bags()
+            range1_2_bags()
+            range2_4_price()
+            price44()
         }
 
 
@@ -982,12 +1006,25 @@
             search();
         });
 
+        function booking(info) {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
+            var db = firebase.firestore();
+            db.collection("Car rentals").where("Order", "==", info).get().then((snapshot) => {
+                getinfo(snapshot.docs, snapshot.size);
+            });
+            global_counter = 1;
+        }
+
+
         function getinfo1(data) {
             var car_rentals = "";
             var d = document.createElement("div");
-            d.setAttribute("id", "getter");
             document.getElementById("results").appendChild(d);
             for (let i = 0; i < data.length; i++) {
+                var index = i;
                 var info = data[i];
                 console.log("bye", info);
                 car_rentals += "<div id='offers_grid' class='offers_grid'>";
@@ -1036,8 +1073,8 @@
                 car_rentals += "</ul>" + "<hr>";
                 car_rentals += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
                 car_rentals += "<h6 style='color:#fa9e1b'>You'll only pay if you arrive for your reservation</h6>";
-                car_rentals += "<div class='button book_button' style='top:-1.5vw'>";
-                car_rentals += " <a href='#''>book<span></span><span></span><span></span></a>";
+                car_rentals += "<div class='button book_button'  style='top:-1.5vw'>";
+                car_rentals += " <a href='#' onclick='booking(" + info['Order'] + ")'>book<span></span><span></span><span></span></a > ";
                 car_rentals += " </div></div></div></div></div></div>";
 
             }
@@ -1045,15 +1082,11 @@
 
         }
 
+
         function getinfo(data, snaps) {
             var car_rentals = "";
             var d = document.createElement("div");
-            d.setAttribute("id", "getter");
-
             document.getElementById("results").appendChild(d);
-
-
-
             console.log(snaps);
 
             for (let i = 0; i < snaps; i++) {
