@@ -1,5 +1,6 @@
 {
     "hosting": {
+        "site": "travelproject-3b437",
         "public": "public",
         "ignore": [
             "firebase.json",
