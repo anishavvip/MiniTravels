@@ -14,9 +14,55 @@
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css" />
     <link rel="stylesheet" type="text/css" href="styles/main_styles.css" />
     <link rel="stylesheet" type="text/css" href="styles/responsive.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
-<body>
+<body onload="modify()">
+
+    <!-- Modal -->
+    <div class="modal fade" id="signup_modal" style="width: 20vw; margin: auto;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign up</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off" onsubmit="signup(event)">
+                        Email address<br>
+                        <input type="email" id="signupEmail" /><br><br>Password<br>
+                        <input type="password" id="signupPassword" />
+                        <br>
+                        <hr>
+                        <button class="btn btn-warning" type="submit">submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="login_modal" style="width: 20vw; margin: auto;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Log in</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off" onsubmit="login(event)">
+                        Email address<br>
+                        <input type="email" id="loginEmail" /><br><br>Password<br>
+                        <input type="password" id="loginPassword" />
+                        <br>
+                        <hr>
+                        <button class="btn btn-warning" style="left: -20vw; " type="submit">submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="super_container">
         <!-- Header -->
 
@@ -58,10 +104,12 @@
                             </div>
                             <div class="user_box ml-auto">
                                 <div class="user_box_login user_box_link">
-                                    <a href="login.html">login</a>
+                                    <a href="#" id="login_m" data-toggle="modal" data-target="#login_modal">login</a>
+                                    <a href="#" id="loggedin"></a>
                                 </div>
                                 <div class="user_box_register user_box_link">
-                                    <a href="#">register</a>
+                                    <a href="#" id="signup_m" data-toggle="modal" data-target="#signup_modal">register</a>
+                                    <a href="#" id="log out" onclick="logout()"></a>
                                 </div>
                             </div>
                         </div>
@@ -1584,6 +1632,7 @@
                     search();
                 });
             </script>
+            <script src="js/auth.js"></script>
 
 </body>
 
