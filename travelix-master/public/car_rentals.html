@@ -100,6 +100,9 @@
                             </div>
                             <div class="user_box ml-auto">
                                 <div class="user_box_login user_box_link">
+                                    <a href="cart.html">My Cart</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
                                     <a href="#" id="login_m" data-toggle="modal" data-target="#login_modal">login</a>
                                     <a href="#" id="loggedin"></a>
                                 </div>
@@ -441,6 +444,7 @@
                                             <li class="sort_btn" onclick="van_type()" id="van">
                                                 <span>van</span>
                                             </li>
+
                                         </ul>
                                     </li>
 
@@ -1014,6 +1018,7 @@
             e.preventDefault();
             search();
         });
+        var cart1 = [];
 
         function booking(info) {
             if (global_counter == 1) {
@@ -1023,8 +1028,22 @@
             var db = firebase.firestore();
             db.collection("Car rentals").where("Order", "==", info).get().then((snapshot) => {
                 getinfo2(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                    cart1.push(grp.data().Order);
+                }))
             });
             global_counter = 1;
+
+        }
+
+        function cart() {
+            console.log("added to cart")
+            localStorage.setItem("cart", JSON.stringify(cart1))
+            var c_cart = localStorage.getItem("cart")
+            console.log('retrievedObject: ', JSON.parse(c_cart));
+            JSON.parse(c_cart, (key, value) => {
+                console.log(value)
+            })
         }
 
         function getinfo1(data) {
@@ -1225,7 +1244,7 @@
                 car_rentals += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
                 car_rentals += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
                 car_rentals += "<div class='button book_button' style='top:-1.5vw'>";
-                car_rentals += " <a href='#' onclick='booking(" + info.Order + ")'>Pay now<span></span><span></span><span></span></a > ";
+                car_rentals += " <a href='#' onclick='cart()'>Pay now<span></span><span></span><span></span></a > ";
                 car_rentals += " </div></div></div></div></div></div>";
 
             }

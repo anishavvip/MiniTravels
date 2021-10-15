@@ -1,11 +1,18 @@
 const myModel = document.querySelectorAll('.modal')
 
+function oload() {
+    localStorage.removeItem('key');
+    localStorage.removeItem("email");
+    localStorage.removeItem("cart");
+}
 
 async function signup(e) {
     e.preventDefault()
+    localStorage.removeItem("email");
+    localStorage.removeItem("cart");
     const email = document.querySelector('#signupEmail')
     const password = document.querySelector('#signupPassword')
-
+    oload();
     try {
         const result = await firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
         await result.user.updateProfile({
@@ -19,6 +26,10 @@ async function signup(e) {
         document.getElementById("log out").innerHTML = "Log out";
         localStorage.setItem("email", email.value)
         console.log(result)
+        var db = firebase.firestore();
+        db.collection("Users").doc(email.value).set({
+            "email": email.value,
+        })
 
     } catch (err) {
         console.log(err)
@@ -32,6 +43,7 @@ async function signup(e) {
 
 async function login(e) {
     e.preventDefault()
+    oload()
     const email = document.querySelector('#loginEmail')
     const password = document.querySelector('#loginPassword')
 
@@ -58,7 +70,7 @@ function logout() {
     document.getElementById("log out").innerHTML = ""
     document.getElementById("login_m").innerHTML = "Login"
     document.getElementById("signup_m").innerHTML = "Register"
-    localStorage.removeItem("email");
+    oload();
 }
 
 
