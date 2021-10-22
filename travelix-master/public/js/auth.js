@@ -71,6 +71,7 @@ function logout() {
     document.getElementById("login_m").innerHTML = "Login"
     document.getElementById("signup_m").innerHTML = "Register"
     oload();
+    modify();
 }
 
 
