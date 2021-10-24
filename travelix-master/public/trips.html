@@ -267,26 +267,25 @@
                             <!-- Search Panel -->
                             <div class="search_panel">
                                 <form id="search_form_2" class="
-                        search_panel_content
-                        d-flex
-                        flex-lg-row flex-column
-                        align-items-lg-center align-items-start
-                        justify-content-lg-between justify-content-start
-                      ">
-                                    <div class="search_item">
+                                                search_panel_content
+                                                d-flex
+                                                flex-lg-row flex-column
+                                                align-items-lg-center align-items-start
+                                                justify-content-lg-between justify-content-start
+                                              " style=" width: 120vw;">
+                                    <div class="search_item" style="width: 17vw;">
                                         <div>destination</div>
-                                        <input type="text" id="trip_destination" class="destination search_input"
-                                            required="required" />
+                                        <input type="text" id="trip_destination" class="destination search_input" />
                                     </div>
                                     <div class="search_item">
                                         <div>check in</div>
-                                        <input type="date" id="trip_checkin" class="check_in search_input"
-                                            placeholder="YYYY-MM-DD" />
+                                        <input type="date" id="trip_checkin" required="required"
+                                            class="check_in search_input" placeholder="YYYY-MM-DD" />
                                     </div>
                                     <div class="search_item">
-                                        <div>Nights</div>
-                                        <input type="int" id="trip_nights" class="check_out search_input"
-                                            placeholder="No. of nights" />
+                                        <div>check out</div>
+                                        <input type="date" id="trip_checkout" required="required"
+                                            class="check_out search_input" placeholder="YYYY-MM-DD" />
                                     </div>
                                     <div class="search_item">
                                         <div>adults</div>
@@ -294,24 +293,23 @@
                                             <option>01</option>
                                             <option>02</option>
                                             <option>03</option>
-                                            <option>04</option>
                                         </select>
                                     </div>
                                     <div class="search_item">
                                         <div>children</div>
                                         <select name="children" id="children" class="dropdown_item_select search_input">
-                                            <option>01</option>
+                                            <option>0</option>
                                             <option>02</option>
                                             <option>03</option>
-                                            <option>04</option>
                                         </select>
                                     </div>
-                                    <button onlick="search()" class="button search_button">
-                                        search<span></span><span></span><span></span>
-                                    </button>
+                                    <div style="top: -1vw;">
+                                        <button onlick="search()" class="button search_button">
+                                            search<span></span><span></span><span></span>
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -416,184 +414,186 @@
         <p class="name4"></p>
 
     </div>
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<!-- Footer -->
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <!-- Footer -->
 
-<footer class="footer" style="height: 35vw; font-size: larger;">
-    <div class="container">
-        <div class="row">
-            <!-- Footer Column -->
-            <div class="col-lg-3 footer_column">
-                <div class="footer_col">
-                    <div class="footer_content footer_about">
-                        <div class="logo_container footer_logo">
-                            <div class="logo">
-                                <a href="#"><img src="images/logo.png" alt="" />MiniTravels</a>
-                            </div>
-                        </div>
-                        <p class="footer_about_text" style="width: 20vw;">
-                            We offer the best limits on our top-rated visit bundles to clients who pick our viable
-                            administrations over and over.
-                            How about we remind you indeed that we don’t expect to be your visit and travel
-                            specialists; we endeavor to be your
-                            vacation accomplices until the end of time.
-                        </p>
-                        <ul class="footer_social_list">
-                            <li class="footer_social_item">
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </li>
-                            <li class="footer_social_item">
-                                <a href="#"><i class="fa fa-facebook-f"></i></a>
-                            </li>
-                            <li class="footer_social_item">
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li class="footer_social_item">
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                            </li>
-                            <li class="footer_social_item">
-                                <a href="#"><i class="fa fa-behance"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer Column -->
-            <div class="col-lg-3 footer_column" style="left: 10vw;width: 20vw;">
-                <div class="footer_col">
-                    <div class="footer_title">blog posts</div>
-                    <div class="footer_content footer_blog">
-                        <!-- Footer blog item -->
-                        <div class="footer_blog_item clearfix">
-                            <div class="footer_blog_image">
-                                <img style="width: 90px;height: 90px;" src="images/kerala_trip3.jpg"
-                                    alt="https://unsplash.com/@avidenov" />
-                            </div>
-                            <div class="footer_blog_content" style="width: 30vw;">
-                                <div class="footer_blog_title">
-                                    <a href="blog.html"
-                                        style="font-size: medium;padding-left: 2vw; display: inline-flex;">Travel with
-                                        us this year</a>
-                                </div>
-                                <div class="footer_blog_date"
-                                    style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 23, 2021
+    <footer class="footer" style="height: 35vw; font-size: larger;">
+        <div class="container">
+            <div class="row">
+                <!-- Footer Column -->
+                <div class="col-lg-3 footer_column">
+                    <div class="footer_col">
+                        <div class="footer_content footer_about">
+                            <div class="logo_container footer_logo">
+                                <div class="logo">
+                                    <a href="#"><img src="images/logo.png" alt="" />MiniTravels</a>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                        <!-- Footer blog item -->
-                        <div class="footer_blog_item clearfix">
-                            <div class="footer_blog_image">
-                                <img style="width: 90px;height: 90px;" src="images/delhi_trip2.jpg"
-                                    alt="https://unsplash.com/@deannaritchie" />
-                            </div>
-                            <div class="footer_blog_content" style="width: 30vw;">
-                                <div class="footer_blog_title">
-                                    <a href="blog.html"
-                                        style="font-size: medium;padding-left: 2vw; display: inline-flex;">New
-                                        destinations for you</a>
-                                </div>
-                                <div class="footer_blog_date"
-                                    style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 21, 2021
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <!-- Footer blog item -->
-                        <div class="footer_blog_item clearfix">
-                            <div class="footer_blog_image">
-                                <img style="width: 90px;height: 90px;" src="images/dubai_trip.jpg"
-                                    alt="https://unsplash.com/@bergeryap87" />
-                            </div>
-                            <div class="footer_blog_content" style="width: 30vw;">
-                                <div class="footer_blog_title">
-                                    <a href="blog.html"
-                                        style="font-size:medium;padding-left: 2vw; display: inline-flex;">Travel with us
-                                        this year</a>
-                                </div>
-                                <div class="footer_blog_date"
-                                    style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 27, 2021
-                                </div>
-                            </div>
+                            <p class="footer_about_text" style="width: 20vw;">
+                                We offer the best limits on our top-rated visit bundles to clients who pick our viable
+                                administrations over and over.
+                                How about we remind you indeed that we don’t expect to be your visit and travel
+                                specialists; we endeavor to be your
+                                vacation accomplices until the end of time.
+                            </p>
+                            <ul class="footer_social_list">
+                                <li class="footer_social_item">
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </li>
+                                <li class="footer_social_item">
+                                    <a href="#"><i class="fa fa-facebook-f"></i></a>
+                                </li>
+                                <li class="footer_social_item">
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="footer_social_item">
+                                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                                </li>
+                                <li class="footer_social_item">
+                                    <a href="#"><i class="fa fa-behance"></i></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>
 
-
-
-            <!-- Footer Column -->
-            <div class="col-lg-3 footer_column" style="left: 20vw;">
-                <div class="footer_col">
-                    <div class="footer_title">contact info</div>
-                    <div class="footer_content footer_contact">
-                        <ul class="contact_info_list">
-                            <li class="contact_info_item d-flex flex-row">
-                                <div>
-                                    <div class="contact_info_icon">
-                                        <img src="images/placeholder.svg" alt="" />
+                <!-- Footer Column -->
+                <div class="col-lg-3 footer_column" style="left: 10vw;width: 20vw;">
+                    <div class="footer_col">
+                        <div class="footer_title">blog posts</div>
+                        <div class="footer_content footer_blog">
+                            <!-- Footer blog item -->
+                            <div class="footer_blog_item clearfix">
+                                <div class="footer_blog_image">
+                                    <img style="width: 90px;height: 90px;" src="images/kerala_trip3.jpg"
+                                        alt="https://unsplash.com/@avidenov" />
+                                </div>
+                                <div class="footer_blog_content" style="width: 30vw;">
+                                    <div class="footer_blog_title">
+                                        <a href="blog.html"
+                                            style="font-size: medium;padding-left: 2vw; display: inline-flex;">Travel
+                                            with
+                                            us this year</a>
+                                    </div>
+                                    <div class="footer_blog_date"
+                                        style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 23, 2021
                                     </div>
                                 </div>
-                                <div class="contact_info_text">
-                                    Vile Parle West, Mumbai, Maharashtra 400056, India
+                            </div>
+                            <br>
+                            <!-- Footer blog item -->
+                            <div class="footer_blog_item clearfix">
+                                <div class="footer_blog_image">
+                                    <img style="width: 90px;height: 90px;" src="images/delhi_trip2.jpg"
+                                        alt="https://unsplash.com/@deannaritchie" />
                                 </div>
-                            </li>
-                            <li class="contact_info_item d-flex flex-row">
-                                <div>
-                                    <div class="contact_info_icon">
-                                        <img src="images/phone-call.svg" alt="" />
+                                <div class="footer_blog_content" style="width: 30vw;">
+                                    <div class="footer_blog_title">
+                                        <a href="blog.html"
+                                            style="font-size: medium;padding-left: 2vw; display: inline-flex;">New
+                                            destinations for you</a>
+                                    </div>
+                                    <div class="footer_blog_date"
+                                        style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 21, 2021
                                     </div>
                                 </div>
-                                <div class="contact_info_text">+91 22 4233 4000</div>
-                            </li>
-                            <li class="contact_info_item d-flex flex-row">
-                                <div>
-                                    <div class="contact_info_icon">
-                                        <img src="images/message.svg" alt="" />
+                            </div>
+                            <br>
+                            <!-- Footer blog item -->
+                            <div class="footer_blog_item clearfix">
+                                <div class="footer_blog_image">
+                                    <img style="width: 90px;height: 90px;" src="images/dubai_trip.jpg"
+                                        alt="https://unsplash.com/@bergeryap87" />
+                                </div>
+                                <div class="footer_blog_content" style="width: 30vw;">
+                                    <div class="footer_blog_title">
+                                        <a href="blog.html"
+                                            style="font-size:medium;padding-left: 2vw; display: inline-flex;">Travel
+                                            with us
+                                            this year</a>
+                                    </div>
+                                    <div class="footer_blog_date"
+                                        style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 27, 2021
                                     </div>
                                 </div>
-                                <div class="contact_info_text">
-                                    <a href="mailto:contactme@gmail.com?Subject=Hello"
-                                        target="_top">mini_travels@gmail.com</a>
-                                </div>
-                            </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                        </ul>
+
+
+                <!-- Footer Column -->
+                <div class="col-lg-3 footer_column" style="left: 20vw;">
+                    <div class="footer_col">
+                        <div class="footer_title">contact info</div>
+                        <div class="footer_content footer_contact">
+                            <ul class="contact_info_list">
+                                <li class="contact_info_item d-flex flex-row">
+                                    <div>
+                                        <div class="contact_info_icon">
+                                            <img src="images/placeholder.svg" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="contact_info_text">
+                                        Vile Parle West, Mumbai, Maharashtra 400056, India
+                                    </div>
+                                </li>
+                                <li class="contact_info_item d-flex flex-row">
+                                    <div>
+                                        <div class="contact_info_icon">
+                                            <img src="images/phone-call.svg" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="contact_info_text">+91 22 4233 4000</div>
+                                </li>
+                                <li class="contact_info_item d-flex flex-row">
+                                    <div>
+                                        <div class="contact_info_icon">
+                                            <img src="images/message.svg" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="contact_info_text">
+                                        <a href="mailto:contactme@gmail.com?Subject=Hello"
+                                            target="_top">mini_travels@gmail.com</a>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 
 
-<div class="copyright">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 order-lg-1 order-2">
-                <div class="copyright_content d-flex flex-row align-items-center">
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 order-lg-1 order-2">
+                    <div class="copyright_content d-flex flex-row align-items-center">
 
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-9 order-lg-2 order-1">
-                <div class="
+                <div class="col-lg-9 order-lg-2 order-1">
+                    <div class="
                   footer_nav_container
                   d-flex
                   flex-row
                   align-items-center
                   justify-content-lg-end
                 ">
-                    <div class="footer_nav">
+                        <div class="footer_nav">
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="styles/bootstrap4/popper.js"></script>
     <script src="styles/bootstrap4/bootstrap.min.js"></script>
