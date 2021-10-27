@@ -4,15 +4,16 @@ function oload() {
     localStorage.removeItem('key');
     localStorage.removeItem("email");
     localStorage.removeItem("cart");
+    localStorage.removeItem("a");
+    
 }
 
 async function signup(e) {
     e.preventDefault()
-    localStorage.removeItem("email");
-    localStorage.removeItem("cart");
+    oload();
     const email = document.querySelector('#signupEmail')
     const password = document.querySelector('#signupPassword')
-    oload();
+    
     try {
         const result = await firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
         await result.user.updateProfile({
@@ -29,6 +30,9 @@ async function signup(e) {
         var db = firebase.firestore();
         db.collection("Users").doc(email.value).set({
             "email": email.value,
+            "last_key_car":0,
+            "last_key_trip":0,
+            "last_key_hotel":0
         })
 
     } catch (err) {
@@ -76,6 +80,7 @@ function logout() {
 
 
 function modify() {
+    
     var a1 = document.getElementById("loggedin").innerHTML
     var a2 = document.getElementById("login_m").innerHTML
     var res = localStorage.getItem("email")

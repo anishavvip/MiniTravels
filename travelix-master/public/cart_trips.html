@@ -16,7 +16,7 @@
 
 </head>
 
-<body onload="modify();cart_items();">
+<body onload="modify();a_cart()">
     <!-- Modal -->
     <div class="modal fade" id="signup_modal" style="width: 20vw; margin: auto;" role="dialog">
         <div class="modal-dialog">
@@ -213,7 +213,7 @@
             <div class="home_background parallax-window" data-parallax="scroll"
                 data-image-src="images/about_background.jpg"></div>
             <div class="home_content">
-                <div class="home_title" style="justify-content: center;">Car rental<br>&ensp;Bookings</div>
+                <div class="home_title" style="justify-content: center;">Trips<br>&ensp;Cart</div>
             </div>
         </div>
 
@@ -246,7 +246,7 @@
                         ">
                                         <img src="images/suitcase.png" alt="" /><span>hotels</span>
                                     </div>
-                                    <div class="
+                                    <div onclick="window.location.href='cart.html'" class="
                           search_tab
                           d-flex
                           flex-row
@@ -255,7 +255,7 @@
                         ">
                                         <img src="images/bus.png" alt="" />car rentals
                                     </div>
-                                    <div onclick="window.location.href='cart_trips.html'" class="
+                                    <div  class="
                           search_tab
                           d-flex
                           flex-row
@@ -278,18 +278,12 @@
         <div class="container" style="height:50vw auto">
             <div id="col-lg-12" class="col-lg-12" style="height: auto;">
                 <!-- Offers Grid -->
-                <div id="not_found" style="display: none;">
-                    <br><br><br>
-                    <h1>NOT FOUND</h1>
-                </div>
                 <div id="results"></div>
-                <div id="results1"></div>
-
             </div>
         </div>
 
         <!--End of offers item  -->
-        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
         <!-- Footer -->
 
         <footer class="footer" style="height: 35vw; font-size: larger;">
@@ -477,7 +471,7 @@
     <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
     <script src="plugins/easing/easing.js"></script>
     <script src="plugins/parallax-js-master/parallax.min.js"></script>
-    <script src="js/car_rentals.js"></script>
+    <script src="js/trips.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
@@ -493,129 +487,228 @@
 -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <script>
-        function cart_items() {
-            document.getElementById("results").innerHTML = "";
-            var email = localStorage.getItem("email");
+        var l1 = [];
+
+        var key1 = 0;
+        var res = localStorage.getItem("email")
+        const key = [];
+        var adder = 0;
+        var b = "";
+        console.log("res");
+        console.log("Im inside cart_trips");
+
+        function a_cart() {
+            console.log("Inside a_cart");
             var db = firebase.firestore();
-            db.collection("Users").where("email", "==", email).get().then((snapshot) => {
-                if ((snapshot.docs)[0].data().last_key_car == 0) {
-                    invisible()
+            var docRef = db.collection("Users").doc(res);
+            docRef.get().then((doc) => {
+                console.log(doc);
+                if (doc.exists) {
+                    for (let i = 1; i <= doc.data().last_key_trip; i++) {
+                        var b = (doc.data()['Cart_Trips.' + i + '.item']).trips.id;
+                        console.log(b);
+                        var db = firebase.firestore();
+                        db.collection("Trips").where("id", "==", b).get().then((snapshot) => {
+                            c_getinfo(snapshot.docs, snapshot.size);
+                        });
+                    }
                 }
                 else {
-                    var snaps = (snapshot.docs)[0].data().last_key_car
-                    console.log(snapshot.docs, snaps)
-                    c_getinfo(snapshot.docs, snaps)
+                    console.log("Not Found");
+                }
+            });
+        }
+
+
+
+
+
+        function prevcart() {
+            console.log("inside prevcart")
+            var db = firebase.firestore();
+            var docRef = db.collection("Users").doc(res);
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    console.log("inside 1st if")
+                    if (doc.data().last_key_trip) {
+                        console.log("inside 2nd if")
+                        for (let i = 1; i <= doc.data().last_key_trip; i++) {
+
+                            var b = (doc.data()['Cart_trips.' + i + '.item']).trips.id;
+                            console.log("B:", b);
+                            var db = firebase.firestore();
+                            db.collection("Trips").where("id", "==", b).get().then((snapshot) => {
+                                c_getinfo(snapshot.docs, snapshot.size);
+                            });
+                        }
+
+                    } else {
+                        console.log("No such document!");
+                    }
                 }
 
             });
         }
-        function c_getinfo(data1, snaps) {
-            visiblee()
-            var car_rentals = "";
-            var d = document.createElement("div");
-            document.getElementById("results").appendChild(d);
 
-            for (let i = 1; i <= snaps; i++) {
-                var info = (data1[0].data())['Cart.' + i + '.item'];
-
-                console.log("hi", info);
-
-                car_rentals += "<div id='offers_grid' class='offers_grid'>";
-                car_rentals += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 350px; width:71vw;padding: 10px;box-shadow: 5px 10px 18px #888888;'>"; //div2
-                car_rentals += "<div style=' border-left: 1px solid grey;height: 350px;position: absolute;left:50vw;margin-left: -3px;top: 0;'></div><div class='offers_item rating_4'style='color: black'>";
-                car_rentals += "<div class='row'>";
-                car_rentals += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
-                car_rentals += "<div class='offers_image_container' style='top:4vw; left:2vw; width:20vw'>";
-                //modification for image
-                car_rentals += " <img id='main_img' style='width:250px;height:200px;' alt='' src=' " + info.Image + "' />";
-                car_rentals += " </div>";
-                car_rentals += "</div";
-                car_rentals += "<div class='col-lg-8' style='top:1.5vw;'>";
-                car_rentals += "<div class='offers_content' style='top:-33vw;left:20vw;width:40vw;'>";
-                car_rentals += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
-                car_rentals += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
-                car_rentals += info.Cost;
-                car_rentals += "<span style='color: black'>per day </span>";
-                car_rentals += " </div>";
-                car_rentals += "<br>";
-                car_rentals += "<h2 id='name' style='color:grey'><b>";
-                car_rentals += info.Car;
-                car_rentals += "</b></h2>";
-                car_rentals += "<h4 id='description'>";
-                car_rentals += info.Type;
-                car_rentals += "</h4>";
-
-                car_rentals += "<ul class='offers_icons_list' style='display:inline'>";
-
-                car_rentals += " <li class='offers_icons_item' style='display:inline'>";
-                car_rentals += "<img style='width:20px;height:20px;' src='images/snowflake.png' alt='' />";
-                car_rentals += " <p style='display: inline;color:black'> Air Conditioning</p>";
-                car_rentals += "</li>";
-
-                car_rentals += "<li class='offers_icons_item' style='display:inline'>";
-                car_rentals += "<img style='width:20px; height:20px;' src='images/manual-transmission-car.png' alt=''' />";
-                car_rentals += "<p style='display: inline;color:black'> Manual gearbox</p>";
-                car_rentals += "</li>";
-
-                car_rentals += "<li class='offers_icons_item' style='display:inline'>";
-                car_rentals += "<img style='width:20px; height:20px;' src='images/default-avatar.png' alt=''' />";
-                car_rentals += "<p style='display: inline;color:black'>";
-                car_rentals += info.Adults + " Adults </p>";
-                car_rentals += "</li>";
-
-                car_rentals += "<li class='offers_icons_item' style='display:inline'>";
-                car_rentals += "<img style='width:20px; height:20px;' src='images/2430422.png' alt=''' />";
-                car_rentals += "<p style='display: inline;color:black'>";
-                car_rentals += info.Bags + " Bags </p>";
-                car_rentals += "</li>";
-
-                car_rentals += "</ul>" + "<hr style='width: 27vw;'>";
-
-                car_rentals += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
-                car_rentals += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
-                car_rentals += "<div class='button book_button' style='top:-1.5vw'>";
-                car_rentals += " <a href='#' style='font-size:larger' >₹" + info.price + "  to be paid<span></span><span></span><span></span></a > ";
-                car_rentals += " </div></div></div></div></div></div>";
-
-                car_rentals += "<div style='height: 350px;padding:1.5vw;position:absolute;left:50vw; width:21vw;margin-left: -3px;top:0vw'>"
-                car_rentals += "<h1 style='color:black; font-size:15px; font-weight:bold'>Pick up address:</h1>"
-                car_rentals += "<h1 style='color:black; font-size:15px'>" + info.pickup + "</h1>"
-                car_rentals += "<h1 style='color:black; font-size:15px;font-weight:bold'>Drop off address:</h1>"
-                car_rentals += "<h1 style='color:black; font-size:15px'>" + info.dropoff + "</h1>"
-                car_rentals += "<h1 style='color:black; font-size:15px; font-weight:bold'>Contact number:</h1>"
-                car_rentals += "<h1 style='color:black; font-size:15px'>" + info.contact + "</h1>"
-                if (info.days == 1) {
-                    car_rentals += "<hr><h1 style='color:black; font-size:15px; font-weight:bold'>Booked for " + info.days + " day</h1>"
+        function c_cart() {
+            a_cart();
+            var db = firebase.firestore();
+            console.log(res);
+            var docRef = db.collection("Users").doc(res);
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    if (doc.data().last_key_trip) {
+                        localStorage.setItem("key", doc.data().last_key_trip)
+                        var key0 = localStorage.getItem("key");
+                        key.push(parseInt(key0));
+                        console.log("taking value of key from db", key[key.length - 1])
+                    } else {
+                        key.push(0);
+                        console.log("No such document!");
+                    }
                 }
-                else {
-                    car_rentals += "<hr><h1 style='color:black; font-size:15px; font-weight:bold'>Booked for " + info.days + " days</h1>"
-                }
-                car_rentals += "</div>"
+                gokey(key)
+            });
+
+            console.log("inside c_cart");
+            var c_cart = localStorage.getItem("cart_trips")
+            JSON.parse(c_cart, (key, value) => {
+                console.log(value)
+                l1.push(value)
+            });
+            console.log(l1.length);
+            for (let i = 0; i < l1.length - 1; i++) {
+                var order = l1[i];
+                var db = firebase.firestore();
+                db.collection("Trips").where("id", "==", l1[i]).get().then((snapshot) => {
+                    c_getinfo(snapshot.docs, snapshot.size);
+                    c_getinfo1(snapshot.docs);
+                });
             }
 
-            d.innerHTML = car_rentals;
-
-        }
-        function invisible() {
-
-            var gg = document.getElementById("not_found");
-
-            gg.style.display = "inline";
-
         }
 
-        function visiblee() {
-
-            var gg = document.getElementById("not_found");
-
-            gg.style.display = "none";
-
+        function gokey(key) {
+            var adder = key[key.length - 1]
+            var adder = parseInt(adder)
+            console.log("adder:", adder)
+            return adder
         }
 
+        function c_getinfo1(l2) {
+            let adder = gokey(key) + 1
+            console.log(adder, "inside db wala with key:", (key1 + adder))
+            console.log("adder:", adder)
+            console.log("key1:", key1)
+            console.log(l2[0].data())
+            console.log("adding to db", (key1 + adder));
+            var info = l2[0].data();
+            var db = firebase.firestore();
+            db.collection('Users').doc(res).set({
+                ['Cart_Trips.' + (key1 + adder) + '.item']: {
+                    ['trips']: {
+                        "Destination": info.Destination,
+                        "cost_per_person": info.cost_per_person,
+                        "Description": info.Description,
+                        "id": info.id
+                    }
+                },
+                "last_key_trip": (key1 + adder),
+
+            }, {
+                merge: true
+            });
+            key1 += 1;
+        }
+
+        function c_getinfo(data, snaps) {
+
+            var trips = "";
+            var d = document.createElement("div");
+            document.getElementById("results").appendChild(d);
+            console.log(snaps);
+
+            for (let i = 0; i < snaps; i++) {
+                var info = data[i].data();
+                console.log("hi", info);
+
+                trips += "<div id='offers_grid' class='offers_grid' style=' height: 350px; padding: 10px; '>";
+                trips += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 400px;width:60vw;padding: 10px;box-shadow: 5px 10px 18px #888888;'>"; //div2
+                trips += "<div class='offers_item rating_4'style='color: black'>";
+                trips += "<div class='row'>";
+                trips += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
+                trips += "<div class='offers_image_container' style='top:4vw; left:2vw; width:60vw'>";
+                //modification for image
+                trips += " <img id='main_img' style='width:300px;height:200px;' alt='' src=' " + info.Image + "' />";
+                trips += " </div>";
+                trips += "</div";
+                trips += "<div class='col-lg-8' style='top:1.5vw;'>";
+                trips += "<div class='offers_content' style='top:-31vw;left:25vw;width:30vw;'>";
+                trips += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
+                trips += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
+                trips += info.cost_per_person;
+                trips += "<span style='color: black'>per person </span>";
+                trips += " </div>";
+                trips += "<br>";
+                trips += "<h2 id='name' style='color:grey'><b>";
+                trips += info.Destination;
+                trips += "</b></h2>";
+                trips += "<br>";
+                trips += "<h4 id='description'>";
+                trips += info.Description;
+                trips += "</h4>";
+                trips += "<br>";
+
+                trips += "<ul class='offers_icons_list' style='display:inline'>";
+
+                trips += " <li class='offers_icons_item' style='display:inline'>";
+                trips += "<img style='width:20px;height:20px;' src='images/travel_icon.png' alt='' />";
+                trips += " <p style='display: inline;color:black'>Travel </p>";
+                trips += "</li>";
+
+                trips += "<li class='offers_icons_item' style='display:inline'>";
+                trips += "<img style='width:20px; height:20px;' src='images/food_icon.png' alt=''' />";
+                trips += "<p style='display: inline;color:black'> Food </p>";
+                trips += "</li>";
+
+                trips += "<li class='offers_icons_item' style='display:inline'>";
+                trips += "<img style='width:20px; height:20px;' src='images/hotel_icon.png' alt=''' />";
+                trips += "<p style='display: inline;color:black'>Hotel </p>";
+
+                trips += "</li>";
+
+                trips += "<li class='offers_icons_item' style='display:inline'>";
+                trips += "<img style='width:20px; height:20px;' src='images/nights_icon.png' alt=''' />";
+                trips += "<p style='display: inline;color:black'>";
+                trips += info.Nights + "Nights </p>";
+                trips += "</li>";
+
+                trips += "<li class='offers_icons_item' style='display:inline'>";
+                trips += "<img style='width:20px; height:20px;' src='images/days_icon.png' alt=''' />";
+                trips += "<p style='display: inline;color:black'>";
+                trips += info.Nights - 1 + "Days  </p>";
+                trips += "</li>";
+
+                trips += "</ul>" + "<hr>";
+
+                trips += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
+                trips += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
+                //trips += "<div class='button book_button' style='top:-1.5vw'>";
+                console.log(info);
+                //trips += " <a href='#' onclick='booking(" + info['id'] + ")'>book<span></span><span></span><span></span></a > ";
+
+                trips += " </div></div></div></div></div>";
+
+
+            }
+
+            d.innerHTML = trips;
+
+        }
     </script>
-
-    <script src="js/auth.js"></script>
-
+    <script src="js/trips.js"></script>
+    <script src="js/auth.js">
+    </script>
 </body>
 
 </html>

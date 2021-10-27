@@ -16,7 +16,7 @@
 
 </head>
 
-<body onload="readall();rest();modify()">
+<body onload="readall();modify();">
     <!-- Modal -->
     <div class="modal fade" id="signup_modal" style="width: 20vw; margin: auto;" role="dialog">
         <div class="modal-dialog">
@@ -280,18 +280,17 @@
                       " style=" width: 120vw;">
                                         <div class="search_item" style="width: 17vw;">
                                             <div>destination</div>
-                                            <input type="text" id="trip_destination" class="destination search_input"
-                                                required="required" />
+                                            <input type="text" id="trip_destination" class="destination search_input" />
                                         </div>
                                         <div class="search_item">
                                             <div>check in</div>
-                                            <input type="date" id="trip_checkin" class="check_in search_input"
-                                                placeholder="YYYY-MM-DD" />
+                                            <input type="date" id="trip_checkin" required="required"
+                                                class="check_in search_input" placeholder="YYYY-MM-DD" />
                                         </div>
                                         <div class="search_item">
                                             <div>check out</div>
-                                            <input type="date" id="trip_checkout" class="check_out search_input"
-                                                placeholder="YYYY-MM-DD" />
+                                            <input type="date" id="trip_checkout" required="required"
+                                                class="check_out search_input" placeholder="YYYY-MM-DD" />
                                         </div>
                                         <div class="search_item">
                                             <div>adults</div>
@@ -483,39 +482,54 @@
                             <!-- Footer blog item -->
                             <div class="footer_blog_item clearfix">
                                 <div class="footer_blog_image">
-                                    <img style="width: 90px;height: 90px;"src="images/kerala_trip3.jpg" alt="https://unsplash.com/@avidenov" />
+                                    <img style="width: 90px;height: 90px;" src="images/kerala_trip3.jpg"
+                                        alt="https://unsplash.com/@avidenov" />
                                 </div>
                                 <div class="footer_blog_content" style="width: 30vw;">
                                     <div class="footer_blog_title">
-                                        <a href="blog.html" style="font-size: medium;padding-left: 2vw; display: inline-flex;">Travel with us this year</a>
+                                        <a href="blog.html"
+                                            style="font-size: medium;padding-left: 2vw; display: inline-flex;">Travel
+                                            with us this year</a>
                                     </div>
-                                    <div class="footer_blog_date"style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 23, 2021</div>
+                                    <div class="footer_blog_date"
+                                        style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 23, 2021
+                                    </div>
                                 </div>
                             </div>
-<br>
+                            <br>
                             <!-- Footer blog item -->
                             <div class="footer_blog_item clearfix">
                                 <div class="footer_blog_image">
-                                    <img style="width: 90px;height: 90px;" src="images/delhi_trip2.jpg" alt="https://unsplash.com/@deannaritchie" />
+                                    <img style="width: 90px;height: 90px;" src="images/delhi_trip2.jpg"
+                                        alt="https://unsplash.com/@deannaritchie" />
                                 </div>
-                                <div class="footer_blog_content"style="width: 30vw;">
+                                <div class="footer_blog_content" style="width: 30vw;">
                                     <div class="footer_blog_title">
-                                        <a href="blog.html"style="font-size: medium;padding-left: 2vw; display: inline-flex;">New destinations for you</a>
+                                        <a href="blog.html"
+                                            style="font-size: medium;padding-left: 2vw; display: inline-flex;">New
+                                            destinations for you</a>
                                     </div>
-                                    <div class="footer_blog_date"style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 21, 2021</div>
+                                    <div class="footer_blog_date"
+                                        style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 21, 2021
+                                    </div>
                                 </div>
                             </div>
-<br>
+                            <br>
                             <!-- Footer blog item -->
                             <div class="footer_blog_item clearfix">
                                 <div class="footer_blog_image">
-                                    <img style="width: 90px;height: 90px;" src="images/dubai_trip.jpg" alt="https://unsplash.com/@bergeryap87" />
+                                    <img style="width: 90px;height: 90px;" src="images/dubai_trip.jpg"
+                                        alt="https://unsplash.com/@bergeryap87" />
                                 </div>
-                                <div class="footer_blog_content"style="width: 30vw;">
+                                <div class="footer_blog_content" style="width: 30vw;">
                                     <div class="footer_blog_title">
-                                        <a href="blog.html"style="font-size:medium;padding-left: 2vw; display: inline-flex;">Travel with us this year</a>
+                                        <a href="blog.html"
+                                            style="font-size:medium;padding-left: 2vw; display: inline-flex;">Travel
+                                            with us this year</a>
                                     </div>
-                                    <div class="footer_blog_date"style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 27, 2021</div>
+                                    <div class="footer_blog_date"
+                                        style="font-size: medium;padding-left: 2vw; display: inline-flex;">Oct 27, 2021
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -559,7 +573,7 @@
                                             target="_top">mini_travels@gmail.com</a>
                                     </div>
                                 </li>
-                               
+
                             </ul>
                         </div>
                     </div>
@@ -616,7 +630,7 @@
   to avoid connecting the SDK to running emulators.
 -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-    <script></script>
+
     <script>
         var global_counter = 0;
         var sum = 0;
@@ -977,9 +991,12 @@
             }
             else {
                 console.log("no. of days", n_days)
+
                 var db = firebase.firestore();
                 db.collection("Car rentals").where("Order", "==", info).get().then((snapshot) => {
+
                     getinfo2(snapshot.docs, snapshot.size);
+                    aa();
                     return Promise.all(snapshot.docs.map(grp => {
                         cart1.push(grp.data().Order);
                     }))
@@ -989,15 +1006,7 @@
             }
         }
 
-        function cart() {
-            console.log("added to cart")
-            localStorage.setItem("cart", JSON.stringify(cart1))
-            var c_cart = localStorage.getItem("cart")
-            console.log('retrievedObject: ', JSON.parse(c_cart));
-            JSON.parse(c_cart, (key, value) => {
-                console.log(value)
-            })
-        }
+
 
         function getinfo1(data) {
             visiblee();
@@ -1130,7 +1139,7 @@
                 car_rentals += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
                 car_rentals += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
                 car_rentals += "<div class='button book_button' style='top:-1.5vw'>";
-                car_rentals += " <a href='#' onclick='booking(" + info.Order + ")'>book<span></span><span></span><span></span></a > ";
+                car_rentals += " <a href='#' onclick='booking(" + info.Order + ");'>book<span></span><span></span><span></span></a > ";
                 car_rentals += " </div></div></div></div></div></div>";
 
             }
@@ -1158,6 +1167,7 @@
         }
 
         function getinfo2(data, snaps) {
+
             visiblee();
             var car_rentals = "";
             var d = document.createElement("div");
@@ -1167,18 +1177,19 @@
             for (let i = 0; i < snaps; i++) {
                 var info = data[i].data();
                 console.log("hi", info);
+                car_rentals += "<div style='display: inline'>";
                 car_rentals += "<div id='offers_grid' class='offers_grid'>";
-                car_rentals += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 350px;padding: 10px;box-shadow: 5px 10px 18px #888888;'>"; //div2
+                car_rentals += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px;  width:780px;height: 300px;padding: 10px;box-shadow: 5px 10px 18px #888888;display: inline-block; float:left; margin-right: 10px;'>"; //div2
                 car_rentals += "<div class='offers_item rating_4'style='color: black'>";
                 car_rentals += "<div class='row'>";
                 car_rentals += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
-                car_rentals += "<div class='offers_image_container' style='top:4vw; left:2vw; width:60vw'>";
+                car_rentals += "<div class='offers_image_container' style='top:4vw; left:2vw; width:20vw'>";
                 //modification for image
-                car_rentals += " <img id='main_img' style='width:300px;height:200px;' alt='' src=' " + info.Image + "' />";
+                car_rentals += " <img id='main_img' style='width:250px;height:200px;' alt='' src=' " + info.Image + "' />";
                 car_rentals += " </div>";
                 car_rentals += "</div";
                 car_rentals += "<div class='col-lg-8' style='top:1.5vw;'>";
-                car_rentals += "<div class='offers_content' style='top:-33vw;left:25vw;width:40vw;'>";
+                car_rentals += "<div class='offers_content' style='top:-33vw;left:20vw;width:40vw;'>";
                 car_rentals += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
                 car_rentals += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
                 car_rentals += info.Cost;
@@ -1216,25 +1227,346 @@
                 car_rentals += info.Bags + " Bags </p>";
                 car_rentals += "</li>";
 
-                car_rentals += "</ul>" + "<hr>";
+                car_rentals += "</ul>" + "<hr style='width: 27vw;'>";
 
                 car_rentals += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
                 car_rentals += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
                 car_rentals += "<div class='button book_button' style='top:-1.5vw'>";
-                car_rentals += " <a href='#' onclick='cart()'>Pay now<span></span><span></span><span></span></a > ";
-                car_rentals += " </div></div></div></div></div></div>";
+
+                console.log(info);
+                //hotels += " <a href='#'>Pay Now<span></span><span></span><span></span></a > ";
+                car_rentals += " </div></div></div></div></div></div></div>";
+
+                var pay = "";
+                var d2 = document.createElement("div");
+
+                var tax = Math.round((info.Cost * 0.05))
+
+
+
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                today = yyyy + '-' + mm + '-' + dd;
+
+                var trip_in = document.getElementById("trip_checkin").value;
+                var trip_out = document.getElementById("trip_checkout").value;
+                var date_check = Date.parse(trip_in) - Date.parse(today);
+                var n_days = (Date.parse(trip_out) - Date.parse(trip_in)) / (60 * 60 * 24 * 1000);
+                document.getElementById("results").appendChild(d2);
+                if (!n_days) {
+                    n_days = 1
+                }
+
+                pay += "<div id='offers_grid' class='offers_grid' style='border:1px solid rgba(158, 158, 158, 0.712);  border-radius: 12px; height: 480px; width: 300px; display: inline-block;top:-4.7vw; float:right; padding: 1.5vw;box-shadow: 5px 10px 18px #888888;'> ";
+
+                pay += "<ul style='margin-left:10px solid black;'>";
+                pay += "<h3 id='name' style='color:grey'>";
+
+
+
+                pay += "<br><br></h3>";
+                pay += "<input type='radio' onclick='radiob(" + info.Cost + ',' + n_days + ")' id='part' name='pay'value='part'><h5 style='color:black;display:inline;font-size:18px;font-weight:bold'> Make part payment now:</h5>";
+
+                pay += "<p style='margin-bottom: -0.5px;color:black;left:-0.5vw;'>Pay the rest to the driver <i class='fa fa-rupee' style='color:#fa9e1b; font-size: 20px;padding-left: 0.7vw;font-size: 18px;'></i></p><p id='othird'style='font-size:18px;color:#fa9e1b;display:inline;font-weight:bold;position: relative;top: -2.2vw;left: 11.4vw;'>"
+                if (!trip_in || !trip_out) {
+                    pay += Math.round(info.Cost / 3) + "</p>"
+                }
+                else {
+                    pay += Math.round((info.Cost * n_days) / 3) + "</p>"
+                }
+                pay += "<br style='display: block;margin-bottom: -0.2em;line-height:20px'>";
+                pay += "<div style='top:-1vw'>"
+                pay += "<input type='radio' id='full' onclick='radiob(" + info.Cost + ',' + n_days + ")' name='pay'value='full'><h5 style='color:black;display:inline;font-size:18px;font-weight:bold'> Make full payment now:</h5>";
+                pay += "<p style='margin-bottom: -0.5px;color:black;left:-0.5vw;'>Pay in advance to driver <i class='fa fa-rupee' style='color:#fa9e1b; font-size: 20px;padding-left: 0.7vw;font-size: 18px;'></i></p><p id ='adv' style='font-size:18px;color:#fa9e1b;display:inline;font-weight:bold;position: relative;top: -2.2vw;left: 11.4vw;'>" + Math.round((info.Cost * n_days * 0.96) + tax) + "</p>";
+
+
+
+                pay += "</div>"
+                pay += "<hr style='margin-top:-2vw;'>"
+                pay += "<p id='discount' style='margin-left: 13vw;color: red;font-size: 12px;'>4% off</p>"
+                pay += "<h3 id='name' style='color:black;margin-top: -2vw;font-size: 18px;font-weight: 600;'>Total Amount</h3><p style='margin-top: -1vw;color:black;left:-0.5vw;font-size:12px'>inc. of tolls and taxes</p>";
+                pay += "<img style='width: 45px;height: 13px;z-index: 2; margin-left: 8vw; margin-top: -4vw;' src='images/slanting.png ' alt='' />";
+                pay += "<h3 id='after_cost' style='color:black;margin-top: -4.2vw;margin-left:11vw;font-size: 25px;font-weight: 600;'>₹" + (Math.round((info.Cost * n_days * 0.96) + tax)) + "</h3><p style='margin-top: -1.7vw;margin-left:7.9vw;color:black;left:-0.5vw;font-size:14px' id='before_cost'>₹" + (Math.round((info.Cost * n_days) + tax)) + "</p>";
+                pay += "<br></h3></h3>";
+                pay += "<label style='color:grey'><b>Enter Coupon code</b> </label>";
+                pay += "<br>";
+                pay += "<input type='text' id='coupon' name='coupon' size='80' placeholder='eg. CAB100' style='padding:0.5vw;width: 250px; height: 30px'>"
+
+                pay += "<p id='apply' style='color:#fa9e1b;margin-top: -1.9vw;margin-left: 13.5vw;'onclick='coupon(" + info.Cost + "," + n_days + ");'>Apply</p>"
+
+                pay += "</div></div>";
+                var details = "";
+                console.log("Im in form");
+                var d1 = document.createElement("div");
+                document.getElementById("results").appendChild(d1);
+
+                details += "<form id='PPAY'><div id='offers_grid' class='offers_grid' style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 35vw; width:780px; padding: 1.5vw; top:-3vw; box-shadow: 5px 10px 18px #888888;display: inline-block; float:left; margin-right: 10px;' >";
+                details += " <ul style='margin-left:10px solid black;'>";
+                details += "<h3 style='font-size:25px;color:grey;font-weight:bolder' id='name' style='color:grey' >";
+                details += "Trip details"
+                details += "</h3>";
+
+                details += "<h4 style='margin-bottom: -0.5px;padding: 1.2vw 0.5vw 0.5vw 0vw;color:black'>Pick-up Address</h4>"
+                details += "<input type='text' id='P_address' name='P_address' size='80' placeholder='Enter Pick-up Address'; required style='width: 700px; height: 35px; font-size:15px;padding:0.5vw;'>"
+                details += "<br style='margin: 2em;display: block;font-size: 24 %;'>"
+                details += "<h4 style='margin-bottom: -0.5px;padding: 1.2vw 0.5vw 0.5vw 0vw;color:black'>Drop-off Address</h4>"
+
+                details += "<input type='text' id='D_address' name='D_address' size='80' required placeholder='Enter Drop-off Address'; style='width: 700px; height: 35px;  font-size:15px;padding:0.5vw;'>"
+                details += "<hr style='width: 730px;'>";
+
+                details += "<h3 style='font-size:25px;color:grey;font-weight:bolder' id='name' style='color:grey' >";
+                details += "Confirm Traveller information"
+                details += "</h3>";
+
+                details += "<div id='sideby' style='top:1vw;'>";
+                details += "<h4 style='margin-bottom: -0.5px;padding:0.5vw 0.5vw 0.5vw 0vw;color:black'>Name</h4>"
+                details += "<input type='text' id='name1' name='name1' size='80' placeholder='Enter your full name' required style='width: 330px; height: 35px; font-size:15px;padding:0.5vw;'>"
+
+                details += "<h4 style='margin-bottom: -0.5px;padding: 1.2vw 0.5vw 0.5vw 0vw;color:black'>Email</h4>";
+
+                details += "<input type='text' id='email1' name='email1' size='80' placeholder='Enter your email address' required style='width: 330px; height: 35px; font-size:15px;padding:0.5vw;'>"
+                details += "<br><br>"
+                details += "<h5 style='color:black;'>By proceeding to book, I agree to MiniTravels's <a href='#'>Privacy Policy</a>, <a href='#'>User Agreement</a>, and <a href='#'>Terms of Service</a>.<h5><br>";
+                details += "</div>";
+
+                details += "<div id='sideby' style='left:370px;top:-15.3vw;padding:1.5vw;'>";
+                details += "<h4 style='margin-bottom: -0.5px;padding: 1.2vw 0.5vw 0.5vw 0vw;color:black'>Gender</h4>"
+                details += "<input type='radio' id='female' name='gender'value='female'><p style='color:black;display:inline;padding:0.8vw 0.8vw 0.8vw 0vw;'> Female </p>";
+                details += "<input type='radio' id='male' name='gender'value='male'><p style='color:black;display:inline;padding:0.8vw 0.8vw 0.8vw 0vw;'> Male</p>";
+
+                details += "<h4 style='margin-bottom: -0.5px;padding: 1.2vw 0.5vw 0.5vw 0vw;color:black'>Contact number</h4>";
+                details += "<div style='top:0vw'><input type='tel' id='tel' name='tel' size='80' placeholder='Enter your 10 digit mobile number' required style='width: 300px; height: 35px; font-size:15px;padding:0.5vw;'></div>"
+
+                details += "<div class='button book_button'  style='top:-52.5vw;left:27vw;width:16.5vw;'>";
+                details += "<input style='font-size:22px;font-weight:bold;background-color: #31124b;width: 17vw;height: 5.5vw;color: white;margin-top: -1vw;margin-left:-1vw;' id='Payresult' name='Payresult' type='submit' onclick='bb()' value = 'Pay' >"
+                details += "</div></form>";
+                details += " </div>";
+                details += "</ul>";
+                details += "</div></div>";
+
+                var extras = "";
+                var e1 = document.createElement("div");
+                document.getElementById("results").appendChild(e1);
+
+                extras += "<div style='display: inline'>";
+                extras += "<div id='offers_grid' class='offers_grid'>";
+                extras += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px;  width:300px;height: 360px;padding: 1.5vw;box-shadow: 5px 10px 18px #888888;display: inline-block;top:-3vw; float:right; padding: 1.5vw;'>"; //div2
+                extras += "<h2 style='font-size:36px;color:grey;font-weight:bold'>Driver & Cab details</h2><br><h4 style='top:-40px;color:black'>Cab and driver details will be shared up to 15 mins prior to departure.</h4><h4 style='padding-top: 0.7vw; top:50px;color:#fa9e1b'>Free cancellation, till 1 hour of departure</h4></div>"
 
             }
-            if (car_rentals == "") {
+            if (car_rentals == "" || pay == "" || details == "") {
                 invisible()
             }
-            else { d.innerHTML = car_rentals; }
+            else {
+                d.innerHTML = car_rentals;
+                d1.innerHTML = details;
+                e1.innerHTML = extras;
+                d2.innerHTML = pay;
+            }
+            fillup();
+        }
+        var gc = 0
+        function radiob(cost, days) {
+
+            var checkRadio = document.querySelector('input[name="pay"]:checked');
+            var tax = Math.round((cost * 0.05))
+            if (checkRadio != null) {
+                if (checkRadio.value == 'part') {
+                    console.log("partttttt")
+                    var score = document.getElementById('othird').textContent
+                    document.getElementById('Payresult').value = "Pay ₹" + score;
+                }
+                if (checkRadio.value == 'full') {
+                    console.log("fullll")
+                    var score = document.getElementById('adv').textContent
+                    document.getElementById('Payresult').value = "Pay ₹" + score;
+                }
+
+            }
 
         }
+
+
+        function coupon(cost, days) {
+            var cc = document.getElementById("coupon").value;
+            console.log(cc)
+            console.log(cost, "  ", days, "   ", tax)
+            var trip_in = document.getElementById("trip_checkin").value;
+            var trip_out = document.getElementById("trip_checkout").value;
+
+            var tax = Math.round((cost * 0.05))
+
+            var db = firebase.firestore();
+            db.collection("Coupon").where("name", "==", cc.toLowerCase()).get().then((snapshot) => {
+                var discount = (snapshot.docs)[0].data().discount
+                if (!trip_in || !trip_out) {
+                    var total = Math.round((cost * (100 - (discount + 4)) / 100) + tax)
+                    radiob(cost, days)
+                }
+                else {
+
+                    var total = Math.round((cost * days * (100 - (discount + 4)) / 100) + tax)
+                    radiob(cost, days)
+                }
+
+                console.log(total)
+                var disc = document.getElementById('discount');
+                disc.textContent = (4 + discount) + "% off";
+                var after_cost = document.getElementById('after_cost');
+                document.getElementById('adv').textContent = total;
+                after_cost.textContent = "₹" + total;
+                var before_cost = document.getElementById('before_cost');
+                before_cost.textContent = "₹" + Math.round(cost * days + tax);
+                document.getElementById('othird').textContent = Math.round(total / 3)
+                radiob(cost, days)
+            });
+            if (!trip_in || !trip_out || !cc) {
+                var disc = document.getElementById('discount');
+                disc.textContent = 4 + "% off";
+                var total = Math.round((cost * days * 0.96) + tax)
+                document.getElementById('adv').textContent = total;
+                var after_cost = document.getElementById('after_cost');
+                after_cost.textContent = "₹" + total;
+                var before_cost = document.getElementById('before_cost');
+                before_cost.textContent = "₹" + Math.round(cost * days + tax);
+                document.getElementById('othird').textContent = Math.round(total / 3)
+                radiob(cost, days)
+            }
+            else if (!cc) {
+                var disc = document.getElementById('discount');
+                disc.textContent = 4 + "% off";
+                var total = Math.round((cost * days * 0.96) + tax)
+                document.getElementById('adv').textContent = total;
+                var after_cost = document.getElementById('after_cost');
+                after_cost.textContent = "₹" + total;
+                var before_cost = document.getElementById('before_cost');
+                before_cost.textContent = "₹" + Math.round(cost * days + tax);
+                document.getElementById('othird').textContent = Math.round(total / 3)
+                radiob(cost, days)
+            }
+
+            console.log(cost, "  ", days, "   ", tax)
+
+
+        }
+        function fillup() {
+            console.log("going to fill up");
+            var res = localStorage.getItem("email")
+            console.log(res)
+            document.getElementById('email1').value = res;
+        }
+
+
+        const pd = [];
+        var adder = 0;
+        var key1 = 0;
+
+
+        function bb() {
+            $("#PPAY").submit(function (e) {
+                e.preventDefault();
+                var c_cart = cart();
+                for (let i = 0; i < c_cart.length - 1; i++) {
+                    var db = firebase.firestore();
+                    db.collection("Car rentals").where("Order", "==", c_cart[i]).get().then((snapshot) => {
+                        console.log(snapshot.docs)
+                        c_getinfo1(snapshot.docs, snapshot.size);
+
+                    });
+                }
+            });
+        }
+        function cart() {
+
+            console.log("added to cart")
+            localStorage.setItem("cart", JSON.stringify(cart1))
+            var c_cart = localStorage.getItem("cart")
+            console.log('retrievedObject: ', JSON.parse(c_cart));
+            JSON.parse(c_cart, (key, value) => {
+                pd.push(value)
+            })
+            return pd
+        }
+        function aa() {
+            var email = document.getElementById('email1').value
+            var db = firebase.firestore();
+            var docRef = db.collection("Users").doc(email);
+            docRef.get().then((doc) => {
+                console.log(doc.data().last_key_car)
+                if (doc.data().last_key_car != 0) {
+                    console.log("setting a with last_key_car")
+                    localStorage.setItem("a", doc.data().last_key_car)
+                } else {
+                    console.log("a=0")
+                    localStorage.setItem("a", 0)
+                }
+            });
+        }
+        var a = 0
+        function c_getinfo1(l2, snaps) {
+            console.log(snaps)
+            for (let i = 0; i < snaps; i++) {
+                var info = l2[i].data();
+                console.log(info.Car)
+                var trip_in = document.getElementById("trip_checkin").value;
+                var trip_out = document.getElementById("trip_checkout").value;
+                var n_days = (Date.parse(trip_out) - Date.parse(trip_in)) / (60 * 60 * 24 * 1000);
+
+                if (!n_days) {
+                    n_days = 1
+                }
+                var email = document.getElementById('email1').value
+                var P_address = document.getElementById("P_address").value
+                var D_address = document.getElementById('D_address').value
+                var tel = document.getElementById('tel').value
+                var name = document.getElementById('name1').value
+                var pay = document.getElementById('Payresult').value
+                var pay = pay.slice(5)
+                aa();
+
+                var a = parseInt(localStorage.getItem("a"))
+                console.log(P_address, D_address, email, tel, name, pay);
+                var db = firebase.firestore();
+                db.collection('Users').doc(email).set({
+                    ['Cart.' + (a + 1) + '.item']: {
+
+                        "Car": info.Car,
+                        "Type": info.Type,
+                        "Adults": info.Adults,
+                        "Bags": info.Bags,
+                        "Image": info.Image,
+                        "Cost": info.Cost,
+                        "Order": info.Order,
+                        "email": email,
+                        "name": name,
+                        "contact": tel,
+                        "pickup": P_address,
+                        "dropoff": D_address,
+                        "price": pay,
+                        "days": n_days,
+
+                    },
+                    "last_key_car": (a + 1),
+                }, {
+                    merge: true
+                }).then(() => {
+                    console.log(a + 1)
+                    console.log("YAYYY Document successfully written!");
+                    a += 1
+                    localStorage.setItem("a", a)
+
+                })
+            }
+        }
+
+
+
     </script>
     <script src="js/auth.js"></script>
-</body>
 
-</html>
+</body>
 
 </html>

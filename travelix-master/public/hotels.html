@@ -11,9 +11,54 @@
     <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="styles/offers_styles.css" />
     <link rel="stylesheet" type="text/css" href="styles/offers_responsive.css" />
+    <script>
+
+      </script>
 </head>
 
-<body onload="initSearch()">
+<body onload="readall();modify();">
+    <!-- Modal -->
+    <div class="modal fade" id="signup_modal" style="width: 20vw; margin: auto;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign up</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off" onsubmit="signup(event)">
+                        Email address<br>
+                        <input type="email" id="signupEmail" /><br><br>Password<br>
+                        <input type="password" id="signupPassword" />
+                        <br>
+                        <hr>
+                        <button class="btn btn-warning" type="submit">submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="login_modal" style="width: 20vw; margin: auto;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Log in</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off" onsubmit="login(event)">
+                        Email address<br>
+                        <input type="email" id="loginEmail" /><br><br>Password<br>
+                        <input type="password" id="loginPassword" />
+                        <br>
+                        <hr>
+                        <button class="btn btn-warning" style="left: -20vw; " type="submit">submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="super_container">
         <!-- Header -->
 
@@ -55,10 +100,16 @@
                             </div>
                             <div class="user_box ml-auto">
                                 <div class="user_box_login user_box_link">
-                                    <a href="login.html">login</a>
+                                    <a href="cart_hotels.html">My Cart</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
+                                    <a href="#" id="login_m" data-toggle="modal" data-target="#login_modal">login</a>
+                                    <a href="#" id="loggedin"></a>
                                 </div>
                                 <div class="user_box_register user_box_link">
-                                    <a href="#">register</a>
+                                    <a href="#" id="signup_m" data-toggle="modal"
+                                        data-target="#signup_modal">register</a>
+                                    <a href="#" id="log out" onclick="logout()"></a>
                                 </div>
                             </div>
                         </div>
@@ -106,10 +157,10 @@
                             class="mag_glass"
                             fill="#FFFFFF"
                             d="M78.438,216.78c0,57.906,22.55,112.343,63.493,153.287c40.945,40.944,95.383,63.494,153.287,63.494
-											s112.344-22.55,153.287-63.494C489.451,329.123,512,274.686,512,216.78c0-57.904-22.549-112.342-63.494-153.286
-											C407.563,22.549,353.124,0,295.219,0c-57.904,0-112.342,22.549-153.287,63.494C100.988,104.438,78.439,158.876,78.438,216.78z
-											M119.804,216.78c0-96.725,78.69-175.416,175.415-175.416s175.418,78.691,175.418,175.416
-											c0,96.725-78.691,175.416-175.416,175.416C198.495,392.195,119.804,313.505,119.804,216.78z"
+                                            s112.344-22.55,153.287-63.494C489.451,329.123,512,274.686,512,216.78c0-57.904-22.549-112.342-63.494-153.286
+                                            C407.563,22.549,353.124,0,295.219,0c-57.904,0-112.342,22.549-153.287,63.494C100.988,104.438,78.439,158.876,78.438,216.78z
+                                            M119.804,216.78c0-96.725,78.69-175.416,175.415-175.416s175.418,78.691,175.418,175.416
+                                            c0,96.725-78.691,175.416-175.416,175.416C198.495,392.195,119.804,313.505,119.804,216.78z"
                           />
                         </g>
                       </g>
@@ -119,8 +170,8 @@
                             class="mag_glass"
                             fill="#FFFFFF"
                             d="M6.057,505.942c4.038,4.039,9.332,6.058,14.625,6.058s10.587-2.019,14.625-6.058L171.268,369.98
-											c8.076-8.076,8.076-21.172,0-29.248c-8.076-8.078-21.172-8.078-29.249,0L6.057,476.693
-											C-2.019,484.77-2.019,497.865,6.057,505.942z"
+                                            c8.076-8.076,8.076-21.172,0-29.248c-8.076-8.078-21.172-8.078-29.249,0L6.057,476.693
+                                            C-2.019,484.77-2.019,497.865,6.057,505.942z"
                           />
                         </g>
                       </g>
@@ -179,25 +230,23 @@
 
         <div class="offers">
             <!-- Search -->
-
             <div class="search">
-                <div class="search_inner">
-                    <!-- Search Contents -->
+                <!-- Search Contents -->
 
-                    <div class="container fill_height no-padding">
-                        <div class="row fill_height no-margin">
-                            <div class="col fill_height no-padding">
-                                <!-- Search Tabs -->
+                <div class="container fill_height">
+                    <div class="row fill_height">
+                        <div class="col fill_height">
+                            <!-- Search Tabs -->
 
-                                <div class="search_tabs_container">
-                                    <div class="
+                            <div class="search_tabs_container">
+                                <div class="
                         search_tabs
                         d-flex
                         flex-lg-row flex-column
                         align-items-lg-center align-items-start
                         justify-content-lg-between justify-content-start
                       ">
-                                        <div class="
+                                    <div onclick="window.location.href='hotels.html'" class="
                           search_tab
                           active
                           d-flex
@@ -205,7 +254,7 @@
                           align-items-center
                           justify-content-lg-center justify-content-start
                         ">
-                                            <img src="images/suitcase.png" alt="" /><span>hotels</span
+                                        <img src="images/suitcase.png" alt="" /><span>hotels</span
                         >
                       </div>
                       <div onclick="window.location.href='car_rentals.html'"
@@ -232,77 +281,49 @@
                       </div>
                     </div>
                   </div>
-                  <!-- Search Panel -->
-                  <div class="search_panel">
-                    <form
-                      id="search_form_0"
-                      class="
+                                    <!-- Search Panel -->
+                                    <div class="search_panel">
+                                        <form id="search_form_3" class="
                         search_panel_content
                         d-flex
                         flex-lg-row flex-column
                         align-items-lg-center align-items-start
                         justify-content-lg-between justify-content-start
-                      "
-                    >
-                      <div class="search_item">
-                        <div>destination</div>
-                        <input
-                          type="text"
-                          id="trip_destination"
-                          class="destination search_input"
-                          required="required"
-                        />
-                      </div>
-                      <div class="search_item">
-                        <div>check in</div>
-                        <input
-                        type="date"
-                          id="trip_checkin"
-                          class="check_in search_input"
-                          placeholder="YYYY-MM-DD"
-                        />
-                      </div>
-                      <div class="search_item">
-                        <div>check out</div>
-                        <input
-                        type="date"
-                          id="trip_checkout"
-                          class="check_out search_input"
-                          placeholder="YYYY-MM-DD"
-                        />
-                      </div>
-                      <div class="search_item">
-                        <div>adults</div>
-                        <select
-                          name="adults"
-                          id="adults"
-                          class="dropdown_item_select search_input"
-                        >
+                      ">
+                                            <div class="search_item">
+                                                <div>destination</div>
+                                                <input type="text" id="trip_destination" class="destination search_input" required="required" />
+                                            </div>
+                                            <div class="search_item">
+                                                <div>check in</div>
+                                                <input type="date" id="trip_checkin" class="check_in search_input" placeholder="YYYY-MM-DD" />
+                                            </div>
+                                            <div class="search_item">
+                                                <div>check out</div>
+                                                <input type="date" id="trip_checkout" class="check_out search_input" placeholder="YYYY-MM-DD" />
+                                            </div>
+                                            <div class="search_item">
+                                                <div>adults</div>
+                                                <select name="adults" id="adults" class="dropdown_item_select search_input">
                           <option>01</option>
                           <option>02</option>
                           <option>03</option>
+                          <option>04</option>
                         </select>
-                      </div>
-                      <div class="search_item">
-                        <div>children</div>
-                        <select
-                          name="children"
-                          id="children"
-                          class="dropdown_item_select search_input"
-                        >
-                          <option>0</option>
+                                            </div>
+                                            <div class="search_item">
+                                                <div>children</div>
+                                                <select name="children" id="children" class="dropdown_item_select search_input">
+                          <option>01</option>
                           <option>02</option>
                           <option>03</option>
+                          <option>04</option>
                         </select>
-                      </div>
-                      <button onlick="search()" class="button search_button">
+                                            </div>
+                                            <button onlick="search()" class="button search_button">
                         search<span></span><span></span><span></span>
-                                            </button>
-                                            </form>
-                                        </div>
-
-
-
+                      </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -319,70 +340,40 @@
                                 <div class="offers_sorting_container">
                                     <ul class="offers_sorting">
                                         <li>
-                                            <span class="sorting_text">price</span>
+                                            <span class="sorting_text">cost</span>
                                             <i class="fa fa-chevron-down"></i>
                                             <ul>
-                                                <li class="sort_btn" id="all_price">
+                                                <li class="sort_btn" onclick="readall()" id="all_price">
                                                     <span>show all</span>
                                                 </li>
-                                                <li class="sort_btn" id="price_ascending">
+                                                <li class="sort_btn" onclick="asc_sort_price()" id="price_ascending">
                                                     <span>ascending</span>
                                                 </li>
-                                                <li class="sort_btn" id="2k_4k">
-                                                    <span>2000 - 4000</span>
+                                                <li class="sort_btn" onclick="price_5to10()" id="2k_4k">
+                                                    <span> < 10000 </span>
                                                 </li>
-                                                <li class="sort_btn" i="4k+">
-                                                    <span>> 4000</span>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <span class="sorting_text">bags</span>
-                                            <i class="fa fa-chevron-down"></i>
-                                            <ul>
-                                                <li class="sort_btn" id="all_bags">
-                                                    <span>show all</span>
-                                                </li>
-                                                <li class="sort_btn" id="1_2">
-                                                    <span>1 to 2</span>
-                                                </li>
-                                                <li class="sort_btn" id="3_4">
-                                                    <span>3 to 4</span>
+                                                <li class="sort_btn" onclick="price_2to5()"  id="4k+">
+                                                    <span> > 10000-20000 </span>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <span class="sorting_text">passengers</span>
+                                            <span class="sorting_text">Star Rating</span>
                                             <i class="fa fa-chevron-down"></i>
                                             <ul>
-                                                <li class="sort_btn" id="all_bags">
+                                                <li class="sort_btn" onclick="readall()" id="all_bags">
                                                     <span>show all</span>
                                                 </li>
-                                                <li class="sort_btn" id="3_5">
+                                                <li class="sort_btn" onclick="nights_1to3()"id="1_2">
+                                                    <span> 1 to 3</span>
+                                                </li>
+                                                <li class="sort_btn" onclick="nights_3to7()" id="3_4">
                                                     <span>3 to 5</span>
                                                 </li>
-                                                <li class="sort_btn" id="6+">
-                                                    <span>6 or more</span>
-                                                </li>
+        
 
                                             </ul>
                                         </li>
-                                        <li>
-                                            <span class="sorting_text">car type</span>
-                                            <i class="fa fa-chevron-down"></i>
-                                            <ul>
-                                                <li class="sort_btn" id="all_car_types">
-                                                    <span>show all</span>
-                                                </li>
-                                                <li class="sort_btn" id="S_L">
-                                                    <span>small-large</span>
-                                                </li>
-                                                <li class="sort_btn" id="SUV">
-                                                    <span>SUV</span>
-                                                </li>
-                                                <li class="sort_btn" id="van">
-                                                    <span>van</span>
-                                                </li>
                                             </ul>
                                         </li>
 
@@ -390,63 +381,15 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-12">
+                            <div id="col-lg-12" class="col-lg-12" style="height: auto;">
                                 <!-- Offers Grid -->
-
-                                <div class="offers_grid">
-                                    <!-- Offers Item -->
-                                    <div style="border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 350px;padding: 10px;
-                                    box-shadow: 5px 10px 18px #888888;">
-                                        <div class="offers_item rating_4">
-                                            <div class="row">
-                                                <div class="col-lg-1 temp_col"></div>
-                                                <div class="col-lg-3 col-1680-4">
-                                                    <div class="offers_image_container" style="top:4vw; left:2vw;">
-                                                        <!-- Image by https://unsplash.com/@kensuarez -->
-                                                        <img style="width:300px;
-                                                                height:200px;" src="images/01_mini_white.png" alt="" />
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-8" style="top:1.5vw">
-                                                    <div class="offers_content">
-                                                        <div class="offers_price">
-                                                            $70<span>per day</span>
-                                                        </div>
-                                                        <br>
-                                                        <h2>Car Name</h2>
-                                                        <h4>
-                                                            Car type
-                                                        </h4>
-
-                                                        <ul class="offers_icons_list">
-                                                            <li class="offers_icons_item">
-                                                                <img style="width:20px;
-                                                                height:20px;" src="images/snowflake.png" alt="" />
-                                                                <p style="display: inline;"> Air Conditioning</p>
-                                                            </li>
-                                                            <li class="offers_icons_item">
-                                                                <img style="width:20px;
-                                                                height:20px;" src="images/manual-transmission-car.png" alt="" />
-                                                                <p style="display: inline;"> Manual gearbox</p>
-                                                            </li>
-
-                                                        </ul>
-
-
-                                                        <hr>
-                                                        <h5 style="color:#fa9e1b">
-                                                            <span>&#10003; </span>Free cancellation</h5>
-                                                        <h6 style="color:#fa9e1b">You'll only pay if you arrive for your reservation</h6>
-
-                                                        <div class="button book_button" style="top:-1.5vw">
-                                                            <a href="#">book<span></span><span></span><span></span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div id="not_found" style="display: none;">
+                                    <br><br><br>
+                                    <h1>NOT FOUND</h1>
+                                </div>
+                                <div id="results"></div>
+                            </div>
+                                  
                                     <!--End of offers item  -->
                                 </div>
                             </div>
@@ -455,9 +398,17 @@
                 </div>
             </div>
 
+            <div class="offers_1">
+                <p class="name1" ></p>
+                <p class="name2"></p>
+                <p class="name3"></p>
+                <p class="name4"></p>
+               
+            </div>
+
             <!-- Footer -->
 
-            <footer class="footer">
+            <footer class="footer" style="height: 35vw; font-size: larger;">
                 <div class="container">
                     <div class="row">
                         <!-- Footer Column -->
@@ -466,11 +417,15 @@
                                 <div class="footer_content footer_about">
                                     <div class="logo_container footer_logo">
                                         <div class="logo">
-                                            <a href="#"><img src="images/logo.png" alt="" />travelix</a>
+                                            <a href="#"><img src="images/logo.png" alt="" />MiniTravels</a>
                                         </div>
                                     </div>
-                                    <p class="footer_about_text">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vu lputate eros, iaculis consequat nisl. Nunc et suscipit urna. Integer eleme ntum orci eu vehicula pretium.
+                                    <p class="footer_about_text" style="width: 20vw;">
+                                        We offer the best limits on our top-rated visit bundles to clients who pick our viable
+                                        administrations over and over.
+                                        How about we remind you indeed that we don’t expect to be your visit and travel
+                                        specialists; we endeavor to be your
+                                        vacation accomplices until the end of time.
                                     </p>
                                     <ul class="footer_social_list">
                                         <li class="footer_social_item">
@@ -540,77 +495,49 @@
                             </div>
                         </div>
 
-                        <!-- Footer Column -->
-                        <div class="col-lg-3 footer_column">
-                            <div class="footer_col">
-                                <div class="footer_title">tags</div>
-                                <div class="footer_content footer_tags">
-                                    <ul class="tags_list clearfix">
-                                        <li class="tag_item"><a href="#">design</a></li>
-                                        <li class="tag_item"><a href="#">fashion</a></li>
-                                        <li class="tag_item"><a href="#">music</a></li>
-                                        <li class="tag_item"><a href="#">video</a></li>
-                                        <li class="tag_item"><a href="#">party</a></li>
-                                        <li class="tag_item"><a href="#">photography</a></li>
-                                        <li class="tag_item"><a href="#">adventure</a></li>
-                                        <li class="tag_item"><a href="#">travel</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Footer Column -->
+                <div class="col-lg-3 footer_column" style="left: 20vw;">
+                    <div class="footer_col">
+                        <div class="footer_title">contact info</div>
+                        <div class="footer_content footer_contact">
+                            <ul class="contact_info_list">
+                                <li class="contact_info_item d-flex flex-row">
+                                    <div>
+                                        <div class="contact_info_icon">
+                                            <img src="images/placeholder.svg" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="contact_info_text">
+                                        Vile Parle West, Mumbai, Maharashtra 400056, India
+                                    </div>
+                                </li>
+                                <li class="contact_info_item d-flex flex-row">
+                                    <div>
+                                        <div class="contact_info_icon">
+                                            <img src="images/phone-call.svg" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="contact_info_text">+91 22 4233 4000</div>
+                                </li>
+                                <li class="contact_info_item d-flex flex-row">
+                                    <div>
+                                        <div class="contact_info_icon">
+                                            <img src="images/message.svg" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="contact_info_text">
+                                        <a href="mailto:contactme@gmail.com?Subject=Hello"
+                                            target="_top">mini_travels@gmail.com</a>
+                                    </div>
+                                </li>
 
-                        <!-- Footer Column -->
-                        <div class="col-lg-3 footer_column">
-                            <div class="footer_col">
-                                <div class="footer_title">contact info</div>
-                                <div class="footer_content footer_contact">
-                                    <ul class="contact_info_list">
-                                        <li class="contact_info_item d-flex flex-row">
-                                            <div>
-                                                <div class="contact_info_icon">
-                                                    <img src="images/placeholder.svg" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="contact_info_text">
-                                                4127 Raoul Wallenber 45b-c Gibraltar
-                                            </div>
-                                        </li>
-                                        <li class="contact_info_item d-flex flex-row">
-                                            <div>
-                                                <div class="contact_info_icon">
-                                                    <img src="images/phone-call.svg" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="contact_info_text">2556-808-8613</div>
-                                        </li>
-                                        <li class="contact_info_item d-flex flex-row">
-                                            <div>
-                                                <div class="contact_info_icon">
-                                                    <img src="images/message.svg" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="contact_info_text">
-                                                <a href="mailto:contactme@gmail.com?Subject=Hello" target="_top">contactme@gmail.com</a
-                        >
-                      </div>
-                    </li>
-                    <li class="contact_info_item d-flex flex-row">
-                      <div>
-                        <div class="contact_info_icon">
-                          <img src="images/planet-earth.svg" alt="" />
-                        </div>
-                      </div>
-                      <div class="contact_info_text">
-                        <a href="https://colorlib.com">www.colorlib.com</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </footer>
+            </div>
+        </div>
+    </footer>
 
             <!-- Copyright -->
 
@@ -682,6 +609,26 @@
     -->
         <script defer src="/__/firebase/init.js?useEmulator=true"></script>
         <script>
+            var global_counter = 0;
+            
+            var dest = ""
+
+            function intersect(arr1, arr2) {
+                var results = [];
+
+                for (var i = 0; i < arr1.length; i++) {
+                    if (arr2.indexOf(arr1[i]) !== -1) {
+                        results.push(arr1[i]);
+                    }
+                }
+                return results
+            }
+
+            function del_ele() {
+                var d = document.getElementById("results");
+                d.innerHTML = ""
+            }
+            var sum = 0;
             function search() {
                 console.log("searching for data");
                 var trip_dest = document.getElementById("trip_destination").value;
@@ -689,28 +636,682 @@
                 var trip_out = document.getElementById("trip_checkout").value;
                 var adult = document.getElementById("adults").value;
                 var child = document.getElementById("children").value;
-
+                var dest = trip_dest;
                 console.log(
                     trip_dest + " " + trip_in + " " + trip_out + " " + adult + " " + child
                 );
-                read();
-
+                search_res(trip_dest);
+            }
+            function search_res(dest) {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
             }
 
-            function read() {
-                var db = firebase.firestore();
-                db.collection('Hotels').get().then((snapshot) => {
-                    snapshot.forEach(doc => {
-                        console.log(doc.data())
-                    })
-                })
-            }
-            $("#search_form_0").submit(function(e) {
-                e.preventDefault();
-                search();
+            var db = firebase.firestore();
+            db.collection("Hotels").where("City", "==", dest).get().then((snapshot) => {
+                getinfo(snapshot.docs, snapshot.size);
             });
+            global_counter = 1;
+            }
+
+        function readall() {
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
+            var db = firebase.firestore();
+            db.collection('Hotels').get().then((snapshot) => {
+                getinfo(snapshot.docs, snapshot.size);
+            });
+            global_counter = 1;
+        }
+
+        function asc_sort_price() {
+
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
+
+            if (sum > 1) {
+                console.log(sum)
+                var db = firebase.firestore();
+                db.collection("Hotels").where("City", "==", dest).orderBy("cost", "asc").get().then((snapshot) => {
+                    getinfo(snapshot.docs, snapshot.size);
+                });
+            } else {
+                console.log(sum)
+                var db = firebase.firestore();
+                db.collection("Hotels").orderBy("cost", "asc").get().then((snapshot) => {
+                    getinfo(snapshot.docs, snapshot.size);
+                });
+            }
+            global_counter = 1;
+        }
+        
+        var array2 = [];
+
+        function price_2to5() {
+               console.log(global_counter);
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
+            if((!dest))
+            {
+            var db = firebase.firestore();
+            db.collection("Hotels").where("cost", ">=", 10000).where("cost", "<=", 20000).orderBy("cost").get().then((snapshot) => {
+               getinfo(snapshot.docs,snapshot.size);
+            });
+            }
+            else
+            {
+                var db=firebase.firestore();
+                db.collection("Hotels").where("cost", ">=", 10000).where("cost", "<=", 20000).orderBy("cost").get().then((snapshot) => {
+                    return Promise.all(snapshot.docs.map(grp => {
+                        if (grp.data().City == dest) {
+                        array2.push(grp.data());
+                    }
+                }))
+            });
+              getinfo1(array2);
+            }
+            // console.log(array2)
+            
+            global_counter = 1;
+            array2.length = 0;
+
+        }
+
+        function price_5to10() {
+            console.log(global_counter);
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
+            if((!dest))
+            {
+                var db = firebase.firestore();
+                db.collection("Hotels").where("cost", ">=", 5000).where("cost", "<=", 10000).orderBy("cost").get().then((snapshot) => {
+                    getinfo(snapshot.docs,snapshot.size);
+
+            });
+        }
+            else{
+            var db = firebase.firestore();
+            db.collection("Hotels").where("cost", ">=", 5000).where("cost", "<=", 10000).orderBy("cost").get().then((snapshot) => {
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().City == dest) {
+                        array2.push(grp.data());
+                    }
+                }))
+            });
+            getinfo1(array2);
+        }
+            // console.log(array2)
+            
+            global_counter = 1;
+            array2.length = 0;
+
+        }
+
+        function nights_1to3() {
+            console.log("IM in nights_1to3",global_counter);
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
+            if(!dest){
+                console.log("dest"+dest);
+                var db = firebase.firestore();
+                db.collection("Hotels").where("star", ">=", 1).where("star", "<=", 3).orderBy("star").get().then((snapshot) => {
+                    getinfo(snapshot.docs, snapshot.size);
+                });
+         
+
+            }
+            else{
+            var db = firebase.firestore();
+            db.collection("Hotels").where("star", ">=", 1).where("star", "<=", 3).orderBy("star").get().then((snapshot) => {
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Destination == dest) {
+                        array2.push(grp.data());
+                    }
+                }))
+            });
+           getinfo1(array2);
+           }
+            // console.log(array2)
+            
+            global_counter = 1;
+            array2.length = 0;
+
+        }
+
+        function nights_3to7() {
+            console.log("IM in nights_3to7",global_counter);
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
+            if(!dest)
+            {
+                
+                var db = firebase.firestore();
+                db.collection("Hotels").where("star", ">=", 4).where("star", "<=", 7).orderBy("star").get().then((snapshot) => {
+                    getinfo(snapshot.docs,snapshot.size);
+                });
+
+            }
+            else{
+            var db = firebase.firestore();
+            db.collection("Hotels").where("star", ">=", 4).where("star", "<=", 7).orderBy("star").get().then((snapshot) => {
+                return Promise.all(snapshot.docs.map(grp => {
+                    if (grp.data().Destination == dest) {
+                        array2.push(grp.data());
+                    }
+                }))
+            });
+            getinfo1(array2);
+        }
+            // console.log(array2)
+           
+            global_counter = 1;
+            
+            array2.length = 0;
+
+        }
+
+        $("#search_form_3").submit(function(e) {
+            e.preventDefault();
+            search();
+        });
+
+        var cart2 = [];
+
+        function booking(info){
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            var trip_in = document.getElementById("trip_checkin").value;
+            var trip_out = document.getElementById("trip_checkout").value;
+            var date_check = Date.parse(trip_in) - Date.parse(today);
+            var n_days = (Date.parse(trip_out) - Date.parse(trip_in)) / (60 * 60 * 24 * 1000);
+            if (global_counter == 1) {
+                del_ele();
+                global_counter = 0;
+            }
+            if (date_check < 0 || n_days < 0) {
+                console.log("failed date");
+                invisible()
+            }
+            else {
+            console.log(info)
+            console.log("no. of days", n_days)
+            var db = firebase.firestore();
+            db.collection("Hotels").where("id", "==", info).get().then((snapshot) => {
+                getinfo2(snapshot.docs, snapshot.size);
+                return Promise.all(snapshot.docs.map(grp => {
+                        cart2.push(grp.data().id);
+                    }))
+            });
+            global_counter = 1; 
+            }          
+        }
+
+        function cart() {
+            console.log("added to cart")
+            localStorage.setItem("cart", JSON.stringify(cart2))
+            var c_cart = localStorage.getItem("cart")
+            console.log('retrievedObject: ', JSON.parse(c_cart));
+            JSON.parse(c_cart, (key, value) => {
+                console.log(value)
+            })
+        }
+
+        var array2=[];
+
+         
+        
+
+        function getinfo1(data) {
+            var hotels = "";
+            var d = document.createElement("div");
+    
+
+            document.getElementById("results").appendChild(d);
+
+            
+
+            for (let i = 0; i < data.length; i++) {
+                var info = data[i];
+                console.log("hi", info);
+                hotels += "<div id='offers_grid' class='offers_grid'>";
+                hotels += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 450px;padding: 10px;box-shadow: 5px 10px 18px #888888;'>"; //div2
+                hotels += "<div class='offers_item rating_4'style='color: black'>";
+                hotels += "<div class='row'>";
+                hotels += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
+                hotels += "<div class='offers_image_container' style='top:4vw; left:2vw; width:60vw'>";
+                
+                hotels += " <img id='main_img' style='width:300px;height:200px;' alt='' src=' " + info.Image + "' />";
+                hotels += " </div>";
+                hotels += "</div";
+                hotels += "<div class='col-lg-8' style='top:1.5vw;'>";
+                hotels += "<div class='offers_content' style='top:-35vw;left:25vw;width:40vw;'>";
+                hotels += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
+                hotels += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
+                hotels += info.cost;
+                hotels += "<span style='color: black'>  </span>";
+                hotels += " </div>";
+                hotels += "<br>";
+                hotels += "<h2 id='name' style='color:grey'><b>";
+                hotels += info.Name;
+                hotels += "<br>";
+                hotels += info.City;
+
+                hotels += "</b></h2>";
+                hotels += "<h4 id='description'>";
+                hotels += info.Facilities;
+                hotels += "</h4>";
+
+                hotels += "Star Rating:";
+                hotels += info.star;
+                hotels += "</li>";
+                hotels += "</ul>" + "<hr>";
+                hotels += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
+                hotels += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
+                hotels += "<div class='button book_button' style='top:-1.5vw'>";
+                hotels += " <a href='#' onclick='booking(" + info['id'] + ")'>book<span></span><span></span><span></span></a > ";
+                hotels += " </div></div></div></div></div></div>";
+                
+            }
+
+            d.innerHTML = hotels;
+
+        }
+
+        function getinfo(data, snaps) {
+            var hotels = "";
+            var d = document.createElement("div");
+
+            document.getElementById("results").appendChild(d);
+
+            console.log(snaps);
+            var costH = 0;
+            for (let i = 0; i < snaps; i++) {
+                var info = data[i].data();
+                console.log(i);
+                var costH;
+                console.log("hi", info);
+                hotels += "<div id='offers_grid' class='offers_grid'>";
+                hotels += "<div style='border:1px solid rgba(158, 158, 158, 0.712);  border-radius: 12px; height: 450px;padding: 10px;box-shadow: 5px 10px 18px #888888;'>"; //div2
+                hotels += "<div class='offers_item rating_4'style='color: black'>";
+                hotels += "<div class='row'>";
+                hotels += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
+                hotels += "<div class='offers_image_container' style='top:4vw; left:2vw; width:60vw'>";
+                hotels += " <img id='main_img' style='width:300px;height:200px;' alt='' src=' " + info.Image + "' />";
+                hotels += " </div>";
+                hotels += "</div";
+                hotels += "<div class='col-lg-8' style='top:1.5vw;'>";
+                hotels += "<div class='offers_content' style='top:-33vw;left:25vw;width:40vw;'>";
+                hotels += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
+                hotels += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
+                hotels += info.cost;
+                costH = info.cost;
+                hotels += "<span style='color: black'> </span>";
+                hotels += " </div>";
+                hotels += "<br>";
+                hotels += "<h2 id='name' style='color:grey'><b>";
+                hotels += info.Name;
+                hotels += "<br>";
+                hotels += info.City;
+
+                hotels += "</b></h2>";
+                hotels += "<h4 id='description'>";
+                hotels += info.Facilities;
+                hotels += "</h4>";
+
+                hotels += "Star Rating:";
+                hotels += info.star;
+
+                hotels += "</ul>" + "<hr>";
+                hotels += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
+                hotels += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
+                hotels += "<div class='button book_button' style='top:-1.5vw'>";
+                console.log(info);
+                hotels += " <a href='#'' onclick='booking(" + info.id + ")'>book<span></span><span></span><span></span></a>";
+                hotels += " </div></div></div></div></div></div>";
+
+            }
+
+            d.innerHTML = hotels;
+
+        }
+
+        function invisible() {
+
+        var gg = document.getElementById("not_found");
+
+        gg.style.display = "inline";
+
+        }
+
+        function visiblee() {
+
+        var gg = document.getElementById("not_found");
+
+        gg.style.display = "none";
+
+        }
+
+        function getinfo2(data, snaps) {
+            visiblee();
+            var hotels = "";
+            var d = document.createElement("div");
+
+            document.getElementById("results").appendChild(d);
+
+            console.log(snaps);
+
+            for (let i = 0; i < snaps; i++) {
+                var info = data[i].data();
+                console.log(i);
+                console.log("hi", info);
+
+                hotels += "<div style='display: inline'>";
+                hotels += "<div id='offers_grid' class='offers_grid'>";
+                hotels += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 450px; width:780px; padding: 10px;box-shadow: 5px 10px 18px #888888; display: inline-block; float:left; margin-right: 10px;'>"; //div2
+                hotels += "<div class='offers_item rating_4'style='color: black'>";
+                hotels += "<div class='row'>";
+                hotels += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
+                hotels += "<div class='offers_image_container' style='top:4vw; left:2vw; width:60vw'>";
+                hotels += " <img id='main_img' style='width:250px;height:200px;' alt='' src=' " + info.Image + "' />";
+                hotels += " </div>";
+                hotels += "</div";
+                hotels += "<div class='col-lg-8' style='top:1.5vw;'>";
+                hotels += "<div class='offers_content' style='top:-33vw;left:20vw;width:30vw;'>";
+                hotels += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
+                hotels += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
+                hotels += info.cost;
+                hotels += "<span style='color: black'> </span>";
+                hotels += " </div>";
+                hotels += "<br>";
+                hotels += "<h2 id='name' style='color:grey'><b>";
+                hotels += info.Name;
+                hotels += "<br>";
+                hotels += info.City;
+
+                hotels += "</b></h2>";
+                hotels += "<h4 id='description'>";
+                hotels += info.Facilities;
+                hotels += "</h4>";
+
+                hotels += "Star Rating:";
+                hotels += info.star;
+
+                hotels += "</ul>" + "<hr>";
+                hotels += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
+                hotels += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
+                hotels += "<div class='button book_button' style='top:-1.5vw'>";
+                console.log(info);
+                //hotels += " <a href='#'>Pay Now<span></span><span></span><span></span></a > ";
+                hotels += " </div></div></div></div></div></div></div>";
+                //form()
+
+                var pay = "";
+                var d2 = document.createElement("div");
+                var tax = 600;
+                var coupon = 'abcde';
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                today = yyyy + '-' + mm + '-' + dd;
+
+                var trip_in = document.getElementById("trip_checkin").value;
+                var trip_out = document.getElementById("trip_checkout").value;
+                var date_check = Date.parse(trip_in) - Date.parse(today);
+                var n_days = (Date.parse(trip_out) - Date.parse(trip_in)) / (60 * 60 * 24 * 1000);
+                
+        
+
+                document.getElementById("results").appendChild(d2);
+
+                pay +="<div id='offers_grid' class='offers_grid' style='border:1px solid rgba(158, 158, 158, 0.712);  border-radius: 12px; height: 450px; width: 300px; display: inline-block; top:-1.8cm; float:right; padding: 10px;box-shadow: 5px 10px 18px #888888;' >";
+                pay += "<ul style='margin-left:10px solid black;'>";
+                pay += "<h3 id='name' style='color:grey'>";
+                pay += "<b>PRICE BREAK-UP</b>"
+                pay += "<br><br></h3>";
+                pay += "<h3 id='name' style='color:black'>Room Price: "
+                pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert; margin-left: 8mm'>";
+                pay += info.cost*n_days;
+                var total = info.cost*n_days;
+                pay += "</i>";
+                pay += "<br>";
+                pay += "<h6 id='name' style='color:black'>1Roomx1Night: ";
+                pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert; margin-left: 15mm'>";
+                pay += info.cost;
+                pay += "</i>";
+                pay += "<br><br>";
+                pay += "<h3 id='name' style='color:black'>Tax & Services: ";
+                pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert; margin-left: -3px'>";
+                pay += tax;
+                pay += "</i>";
+                pay += "<br><br></h3></h3>";
+                pay += "<h3 id='name' style='color:black'>Total: ";
+                pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert; margin-left: 2.8cm'>";
+                pay += (total)+tax;
+                pay += "</i></h3>";
+                pay += "<br><br>";
+                pay += "<label style='color:gery'><b>Apply Coupon?</b> </label>";
+                pay += "<br>";
+                //pay += "<input type='submit' id='coup' size='50' value='Submit' onclick='table()' style = 'float:left;  margin-top:-5mm; margin-left:49mm'><br>";
+                pay += "<input type='text' id='coupon' name='coup' size='80' placeholder='DISCOUNT101' style='width: 205px; height: 30px'>"
+                if (n_days) {
+                    pay += "<p style='color:#fa9e1b;margin-top: -1.9vw;margin-left: 11vw;'onclick='coupon(" + info.Cost + "," + n_days + "," + tax + ");'>Apply</p>"
+                } else {
+                    pay += "<p style='color:#fa9e1b;margin-top: -1.9vw;margin-left: 11vw;'onclick='coupon(" + info.Cost + "," + 1 + "," + tax + ");'>Apply</p>"
+                }
+                
+                pay += "<div class='button book_button' style='top:-1.5vw'>";
+
+                pay += " <a href='#' id='Payresult' name='Payresult' value = 'Pay Now' onclick='table(" + info.id + ")'>Pay Now<span></span><span></span><span></span></a > ";
+                
+                
+                pay += "</div></div>";
+
+                
+                var details = ""
+                console.log("Im in form");
+                var d1 = document.createElement("div");
+                document.getElementById("results").appendChild(d1);
+
+                var db=firebase.firestore();
+                var trip_in = document.getElementById("trip_checkin").value;
+                var trip_out = document.getElementById("trip_checkout").value;
+                var adult = document.getElementById("adults").value;
+                var child = document.getElementById("children").value;
+
+                details +="<div id='offers_grid' class='offers_grid' style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: min-content; padding: 10px; top:-7vw; box-shadow: 5px 10px 18px #888888;display: inline-block; float:left; margin-right: 10px;' >";
+                details += " <ul style='margin-left:10px solid black;'>";
+                details += "<h2 id='name' style='color:grey' ><b>";
+                details += "<b>GUEST DETAILS"
+                details += "<br></h2>";
+                details += "<div id='sideby' style='top:1vw;'>";
+                details += "<label style='color:black; font-size:25px; font-family:Serif' >I'm looking for </label>"
+                details += "<br></b>";
+                details += "<input type='radio' id='me'  value='me' name='sel' required>"
+                details += "<label  style='color:grey; font-size:20px;'> Myself </label>"
+                details += "<br>";
+                details += "<input type='radio' id='other' name='sel'  value='other'>"
+                details += "<label  style='color:grey; font-size:20px;'>Somebody Else</label>"
+                details += "<br><br>";
+                details += "<label style='color:black; font-size:25px; float:left;  margin-top:4mm; margin-right:8mm; margin-left:1mm; font-family:Serif'><b>First Name:  </b> </label>"
+                details += "<br>";
+                details += "<input type='text' id='fname' name='firstname' size='80' margin-right: -3px placeholder='First name as in passport' required style='width: 280px; height: 35px'>"
+                details += "<br>";
+                details += "<label style='color:black; font-size:25px; float:left;  margin-top:4mm; margin-right:10mm; margin-left:-42mm; font-family:Serif'><b>Last Name:  </b> </label>"
+                details += "<br>";
+                details += "<input type='text' id='lname' name='lastname' size='80' placeholder='Last name as in passport' required style='width: 280px; height: 35px'>"
+                details += "<br>";
+                details += "<label style='color:black; font-size:25px; float:left;  margin-top:5mm; margin-right:17mm; margin-left:-43mm;  font-family:Serif; '><b>Email-id:  </b> </label>"
+                details += "<br>";
+                details += "<input type='email' id='em' name='em' size='80' placeholder='Your email' required style='width: 280px; height: 35px'>"
+                details += "<br>";
+                details += "<label style='color:black; font-size:25px; float:left;  margin-top:3mm; margin-right:10mm; margin-left:-44mm;  font-family:Serif'><b>Contact No:  </b> </label>"
+                details += "<br>";
+                details += "<input type='tel' id='tel' name='tel' size='80' placeholder='Your contact number' required style='width: 280px; height: 30px'>";
+
+                details += "<div id='sideby' style='left:526px;top:-24.3vw;padding:1.5vw;'>";
+                details += "<label style='color:black; font-size:25px; font-family:Serif' >Check-in: </label>"
+                details += "  ";
+                details += "<label style='color:grey; font-size:25px; font-family:Serif'><b>"
+                details += trip_in
+                details += "</label></b>";
+                //details += "<input type='date' id='trip_checkin' class='check_in search_input' style='width: 5cm' />";
+                details += "<br><br>";
+                details += "<div id='sideby'>";
+                details += "<label style='color:black; font-size:25px; font-family:Serif' >Check-out: </label>"
+                details += "  ";
+                details += "<label style='color:grey; font-size:25px; font-family:Serif'><b>"
+                details += trip_out
+                details += "</label></b>";
+                //details += "<input type='date' id='trip_checkout' class='check_out search_input' style='width: 5cm' />";
+                details += "<br><br>";
+                details +=" </div>";
+                details +="</ul>";
+                details +="</div></div>";
+
+                details +="</div>";
+            }
+
+            d.innerHTML = hotels;
+            d1.innerHTML = details;
+            d2.innerHTML= pay;
+            
+
+        }
+
+        function coupon(cost, days, tax) {
+            var cc = document.getElementById("coupon").value;
+            console.log(cc)
+            console.log(cost, "  ", days, "   ", tax)
+            var trip_in = document.getElementById("trip_checkin").value;
+            var trip_out = document.getElementById("trip_checkout").value;
+            var db = firebase.firestore();
+            db.collection("Coupon").where("name", "==", cc.toLowerCase()).get().then((snapshot) => {
+                var discount = (snapshot.docs)[0].data().discount
+                if (!trip_in || !trip_out) {
+                    var total = cost-discount
+                }
+                else {
+
+                    var total = cost - discount
+                }
+                console.log(total)
+            });
+
+        }
+        var a5 = 0;
+
+        function table(id) {
+
+            console.log("Inside table", id);
+            cart2 = [];
+            cart2.push(id);
+
+            console.log("cart2 :", cart2);
+            localStorage.setItem("cart_hotels", JSON.stringify(cart2))
+            var c_cart = localStorage.getItem("cart_hotels")
+            console.log('retrievedObject: ', JSON.parse(c_cart));
+            JSON.parse(c_cart, (key, value) => {
+                console.log(value)
+            })
+
+            var res = localStorage.getItem("email");
+            console.log(res);
+            var db = firebase.firestore();
+            db.collection("Users").where("email", "==", res).get().then((snapshot) => {
+                a5 = snapshot.docs[0].data().last_key_hotel;
+                if (!a5) {
+                    a5 = 0;
+                }
+                console.log("a", a5);
+            })
+            db.collection("Hotels").where("id", "==", id).get().then((snapshot1) => {
+                console.log("Hi in coll");
+                //console.log(snapshot1.docs);
+                var info = snapshot1.docs[0].data();
+                console.log("Info :" + info.Name);
+
+                db.collection('Users').doc(res).set({
+
+                    ['Cart_Hotels.' + (a5 + 1) + '.item']: {
+                        ['hotels']: {
+                            "Name": info.Name,
+                            "cost": info.cost,
+                            "City": info.City,
+                            "star": info.star,
+                            "id":info.id
+                        }
+                    },
+                    "last_key_hotel": a5 + 1,
+
+                }, {
+                    merge: true
+                });
+
+            });
+        }
+
+        function coupon() {
+            var addbtn = document.getElementById("coupon")
+            var i = 0;
+            addbtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                var fname = document.getElementById("fname").value
+                var lname = document.getElementById('lname').value
+                var email = document.getElementById('em').value
+                var contact = document.getElementById('tel').value
+                var check = document.getElementById('coup').value
+                var trip_in = document.getElementById("trip_checkin").value;
+                var trip_out = document.getElementById("trip_checkout").value;
+                var db = firebase.firestore();
+                db.collection("Users").doc(email).set({
+                    "email": email,
+                    "id" : i,
+                    "First Name": fname,
+                    "Last Name": lname,
+                    //"email": email,
+                    "contact": contact
+                })
+                i+=1
+                if (check = "abcde"){
+                    //var pay1 = ""
+                    var d5 = document.createElement("div");
+                    d5.innerHTML = "<b>Discount: </b>";
+                    d5.innerHTML += "Rs.599"
+                    document.getElementById("Payresult").appendChild(d5);
+                }
+                console.log(fname)
+                console.log(email)
+    
+
+                })
+        }
+
+        </script>
+        <script src="js/auth.js">
         </script>
 
 </body>
 
 </html>
+

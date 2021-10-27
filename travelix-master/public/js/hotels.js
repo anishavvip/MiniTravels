@@ -20,22 +20,22 @@ $(document).ready(function() {
 
     /* 
 
-      1. Vars and Inits
+    1. Vars and Inits
 
-      */
+    */
 
-    var menu = $(".menu");
+    var menu = $('.menu');
     var menuActive = false;
-    var header = $(".header");
+    var header = $('.header');
     var searchActive = false;
 
     setHeader();
 
-    $(window).on("resize", function() {
+    $(window).on('resize', function() {
         setHeader();
     });
 
-    $(document).on("scroll", function() {
+    $(document).on('scroll', function() {
         setHeader();
     });
 
@@ -47,22 +47,22 @@ $(document).ready(function() {
 
     /* 
 
-      2. Set Header
+    2. Set Header
 
-      */
+    */
 
     function setHeader() {
         if (window.innerWidth < 992) {
             if ($(window).scrollTop() > 100) {
-                header.addClass("scrolled");
+                header.addClass('scrolled');
             } else {
-                header.removeClass("scrolled");
+                header.removeClass('scrolled');
             }
         } else {
             if ($(window).scrollTop() > 100) {
-                header.addClass("scrolled");
+                header.addClass('scrolled');
             } else {
-                header.removeClass("scrolled");
+                header.removeClass('scrolled');
             }
         }
         if (window.innerWidth > 991 && menuActive) {
@@ -72,16 +72,16 @@ $(document).ready(function() {
 
     /* 
 
-      3. Init Menu
+    3. Init Menu
 
-      */
+    */
 
     function initMenu() {
-        if ($(".hamburger").length && $(".menu").length) {
-            var hamb = $(".hamburger");
-            var close = $(".menu_close_container");
+        if ($('.hamburger').length && $('.menu').length) {
+            var hamb = $('.hamburger');
+            var close = $('.menu_close_container');
 
-            hamb.on("click", function() {
+            hamb.on('click', function() {
                 if (!menuActive) {
                     openMenu();
                 } else {
@@ -89,25 +89,28 @@ $(document).ready(function() {
                 }
             });
 
-            close.on("click", function() {
+            close.on('click', function() {
                 if (!menuActive) {
                     openMenu();
                 } else {
                     closeMenu();
                 }
             });
+
+
         }
     }
 
     function openMenu() {
-        menu.addClass("active");
+        menu.addClass('active');
         menuActive = true;
     }
 
     function closeMenu() {
-        menu.removeClass("active");
+        menu.removeClass('active');
         menuActive = false;
     }
+
 
     /* 
 
@@ -116,33 +119,37 @@ $(document).ready(function() {
 	*/
 
     function initSearch() {
-        var panels = $(".search_panel");
-        $(panels[0]).addClass("active");
+        var panels = $('.search_panel');
+        $(panels[0]).addClass('active');
+        $('.search_tab').removeClass('active');
+        var search_panels = $('.search_tab');
+        $(search_panels[0]).addClass('active');
+    
     }
 
     /* 
 
-      6. Init More Options
+    6. Init More Options
 
-      */
+    */
 
     function initMoreOptions() {
-        if ($(".more_options").length) {
-            var triggerEle = $(".more_options_trigger");
-            var ele = $(".more_options_list");
+        if ($('.more_options').length) {
+            var triggerEle = $('.more_options_trigger');
+            var ele = $('.more_options_list');
 
-            triggerEle.on("click", function(e) {
+            triggerEle.on('click', function(e) {
                 e.preventDefault();
-                triggerEle.toggleClass("active");
-                ele.toggleClass("active");
+                triggerEle.toggleClass('active');
+                ele.toggleClass('active');
 
                 var panel = ele;
-                var panelH = ele.prop("scrollHeight") + "px";
+                var panelH = ele.prop('scrollHeight') + "px";
 
-                if (panel.css("max-height") == "0px") {
-                    panel.css("max-height", panel.prop("scrollHeight") + "px");
+                if (panel.css('max-height') == "0px") {
+                    panel.css('max-height', panel.prop('scrollHeight') + "px");
                 } else {
-                    panel.css("max-height", "0px");
+                    panel.css('max-height', "0px");
                 }
             });
         }
@@ -150,33 +157,33 @@ $(document).ready(function() {
 
     /* 
 
-      7. Init Search Form
+    7. Init Search Form
 
-      */
+    */
 
     function initSearchForm() {
-        if ($(".search_form").length) {
-            var searchForm = $(".search_form");
-            var searchInput = $(".search_content_input");
-            var searchButton = $(".content_search");
+        if ($('.search_form').length) {
+            var searchForm = $('.search_form');
+            var searchInput = $('.search_content_input');
+            var searchButton = $('.content_search');
 
-            searchButton.on("click", function(event) {
+            searchButton.on('click', function(event) {
                 event.stopPropagation();
 
                 if (!searchActive) {
-                    searchForm.addClass("active");
+                    searchForm.addClass('active');
                     searchActive = true;
 
-                    $(document).one("click", function closeForm(e) {
-                        if ($(e.target).hasClass("search_content_input")) {
-                            $(document).one("click", closeForm);
+                    $(document).one('click', function closeForm(e) {
+                        if ($(e.target).hasClass('search_content_input')) {
+                            $(document).one('click', closeForm);
                         } else {
-                            searchForm.removeClass("active");
+                            searchForm.removeClass('active');
                             searchActive = false;
                         }
                     });
                 } else {
-                    searchForm.removeClass("active");
+                    searchForm.removeClass('active');
                     searchActive = false;
                 }
             });

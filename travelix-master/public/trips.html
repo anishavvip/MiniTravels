@@ -92,7 +92,7 @@
                             </div>
                             <div class="user_box ml-auto">
                                 <div class="user_box_login user_box_link">
-                                    <a href="cart.html">My Cart</a>
+                                    <a href="cart_trips.html">My Cart</a>
                                 </div>
                                 <div class="user_box_login user_box_link">
                                     <a href="#" id="login_m" data-toggle="modal" data-target="#login_modal">login</a>
@@ -267,25 +267,26 @@
                             <!-- Search Panel -->
                             <div class="search_panel">
                                 <form id="search_form_2" class="
-                                                search_panel_content
-                                                d-flex
-                                                flex-lg-row flex-column
-                                                align-items-lg-center align-items-start
-                                                justify-content-lg-between justify-content-start
-                                              " style=" width: 120vw;">
-                                    <div class="search_item" style="width: 17vw;">
+                        search_panel_content
+                        d-flex
+                        flex-lg-row flex-column
+                        align-items-lg-center align-items-start
+                        justify-content-lg-between justify-content-start
+                      ">
+                                    <div class="search_item">
                                         <div>destination</div>
-                                        <input type="text" id="trip_destination" class="destination search_input" />
+                                        <input type="text" id="trip_destination" class="destination search_input"
+                                            required="required" />
                                     </div>
                                     <div class="search_item">
                                         <div>check in</div>
-                                        <input type="date" id="trip_checkin" required="required"
-                                            class="check_in search_input" placeholder="YYYY-MM-DD" />
+                                        <input type="date" id="trip_checkin" class="check_in search_input"
+                                            placeholder="YYYY-MM-DD" />
                                     </div>
                                     <div class="search_item">
-                                        <div>check out</div>
-                                        <input type="date" id="trip_checkout" required="required"
-                                            class="check_out search_input" placeholder="YYYY-MM-DD" />
+                                        <div>Nights</div>
+                                        <input type="int" id="trip_nights" class="check_out search_input"
+                                            placeholder="No. of nights" />
                                     </div>
                                     <div class="search_item">
                                         <div>adults</div>
@@ -293,23 +294,24 @@
                                             <option>01</option>
                                             <option>02</option>
                                             <option>03</option>
+                                            <option>04</option>
                                         </select>
                                     </div>
                                     <div class="search_item">
                                         <div>children</div>
                                         <select name="children" id="children" class="dropdown_item_select search_input">
-                                            <option>0</option>
+                                            <option>01</option>
                                             <option>02</option>
                                             <option>03</option>
+                                            <option>04</option>
                                         </select>
                                     </div>
-                                    <div style="top: -1vw;">
-                                        <button onlick="search()" class="button search_button">
-                                            search<span></span><span></span><span></span>
-                                        </button>
-                                    </div>
+                                    <button onlick="search()" class="button search_button">
+                                        search<span></span><span></span><span></span>
+                                    </button>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -623,9 +625,15 @@
         function del_ele() {
             var d = document.getElementById("results");
             d.innerHTML = "";
+
+
             document.getElementById("results1").innerHTML = "";
 
             document.getElementById("results2").innerHTML = "";
+
+
+
+
         }
 
         var trip_in = document.getElementById("trip_checkin").value;
@@ -1022,6 +1030,21 @@
             global_counter = 2;
         }
 
+        var cart1 = [];
+
+        function cart() {
+            console.log("added to cart")
+            localStorage.setItem("cart_trips", JSON.stringify(cart1))
+            var c_cart = localStorage.getItem("cart_trips")
+            console.log('retrievedObject: ', JSON.parse(c_cart));
+            JSON.parse(c_cart, (key, value) => {
+                console.log(value)
+
+            })
+        }
+
+
+
 
         function booking(info) {
             var today = new Date();
@@ -1060,6 +1083,7 @@
                 });
                 //hotels12();
                 activity_call(info);
+
 
                 global_counter = 2;
 
@@ -1151,6 +1175,59 @@
 
 
         }
+        var a5;
+        function table(id) {
+
+            console.log("Inside table", id);
+            cart1 = [];
+            cart1.push(id);
+
+            console.log("cart1 :", cart1);
+            localStorage.setItem("cart_trips", JSON.stringify(cart1))
+            var c_cart = localStorage.getItem("cart_trips")
+            console.log('retrievedObject: ', JSON.parse(c_cart));
+            JSON.parse(c_cart, (key, value) => {
+                console.log(value)
+            })
+
+            var res = localStorage.getItem("email");
+            console.log(res);
+            var db = firebase.firestore();
+            db.collection("Users").where("email", "==", res).get().then((snapshot) => {
+                a5 = snapshot.docs[0].data().last_key_trip;
+                if (!a5) {
+                    a5 = 0;
+                }
+                console.log("a", a5);
+            })
+            db.collection("Trips").where("id", "==", id).get().then((snapshot1) => {
+                console.log("Hi in coll");
+                //console.log(snapshot1.docs);
+                var info = snapshot1.docs[0].data();
+                console.log("Info :" + info.Description);
+
+
+                db.collection('Users').doc(res).set({
+
+
+                    ['Cart_Trips.' + (a5 + 1) + '.item']: {
+                        ['trips']: {
+                            "Destination": info.Destination,
+                            "cost_per_person": info.cost_per_person,
+                            "Description": info.Description,
+                            "id": info.id
+                        }
+                    },
+                    "last_key_trip": a5 + 1,
+
+                }, {
+                    merge: true
+                });
+
+
+            });
+        }
+
 
 
         function getinfo(data, snaps) {
@@ -1276,8 +1353,8 @@
                 */
 
 
-                trips += "<div id='offers_grid' class='offers_grid' style=' height: 260px; padding: 10px; '>";
-                //trips += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 1000px;padding: 10px;box-shadow: 5px 10px 18px #888888;'>"; //div2
+                trips += "<div id='offers_grid' class='offers_grid' style=' height: 350px; padding: 10px; '>";
+                trips += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 400px;width:52vw;padding: 10px;box-shadow: 5px 10px 18px #888888;'>"; //div2
                 trips += "<div class='offers_item rating_4'style='color: black'>";
                 trips += "<div class='row'>";
                 trips += "<div class='col-lg-1 temp_col'></div> <div class='col-lg-3 col-1680-4'>";
@@ -1287,7 +1364,7 @@
                 trips += " </div>";
                 trips += "</div";
                 trips += "<div class='col-lg-8' style='top:1.5vw;'>";
-                trips += "<div class='offers_content' style='top:-25vw;left:25vw;width:40vw;'>";
+                trips += "<div class='offers_content' style='top:-31vw;left:25vw;width:30vw;'>";
                 trips += "<div id='price' style='color:#fa9e1b' class='offers_price'>";
                 trips += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: smaller'></i>";
                 trips += info.cost_per_person;
@@ -1337,20 +1414,98 @@
 
                 trips += "</ul>" + "<hr>";
 
-                //trips += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
-                //trips += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
+                trips += "<h5 style='color: #fa9e1b'><span>&#10003; </span>Free cancellation</h5>";
+                trips += "<h6 style='color:#fa9e1b' style='display:inline'>You'll only pay if you arrive for your reservation</h6>";
                 //trips += "<div class='button book_button' style='top:-1.5vw'>";
                 console.log(info);
                 //trips += " <a href='#' onclick='booking(" + info['id'] + ")'>book<span></span><span></span><span></span></a > ";
 
-                trips += " </div></div></div></div></div></div>";
+                trips += " </div></div></div></div></div>";
 
                 trips += "<h2 style='inline ;font-size:15px; font-weight:700; color:grey; margin-top:35px;margin-bottom:-30px'> HOTEL TO STAY: </h2>"
+
+                var pay = "";
+                var d2 = document.createElement("div");
+                var tax = 600;
+                var coupon = 'abcde';
+
+
+                document.getElementById("results").appendChild(d2);
+
+                var adults = parseInt(document.getElementById("adults").value)
+                var children = parseInt(document.getElementById("children").value)
+                console.log(adults, children, typeof (adults));
+
+                pay += "<div id='offers_grid' class='offers_grid' style='border:1px solid rgba(158, 158, 158, 0.712);  border-radius: 12px; height: 400px; width: 270px; display: inline-block; top:-10.9cm; float:right; padding: 10px;box-shadow: 5px 10px 18px #888888;' >";
+                pay += "<ul style='margin-left:10px solid black;margin:2px;'>";
+                pay += "<h3 id='name' style='color:grey'>";
+                pay += "<div id='break_up_head' style='border: 2px solid #fa9e1b;background-color:lightgoldenrodyellow;padding:5px;margin:5px;' >";
+                pay += "<h6 style='text-decoration:line-through; display:inline; '>";
+                pay += "Rs ." + info.cost_per_person;
+                pay += "</h6>";
+                pay += "<p style='display:inline; color: white; margin-left:70px; padding:6px;  background-image: linear-gradient(45deg, darkviolet, transparent);background-color:#fa9e1b; '>" + info.Discount + "% OFF </p>"
+                pay += "<br>"
+                pay += "Rs ." + info.cost_per_person * (1 - (info.Discount / 100));
+                pay += "</div><br>";
+                pay += "Extras</h3>";
+                if (!adults || !children) {
+                    pay += "<h3 id='name' style='color:gray;font-size:17px;'> Extra Adult: ";
+                    pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert'>";
+                    pay += info.cost_per_person * 0.4 * (1 - (info.Discount / 100));
+                    pay += "</i>";
+                    pay += "<br>";
+                }
+                else {
+                    pay += "<h3 id='name' style='color:gray;font-size:17px;'>" + adults + "Adult: ";
+                    pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert'>";
+                    pay += info.cost_per_person * 0.4 * adults * (1 - (info.Discount / 100));
+                    pay += "</i>";
+                    pay += "<br>";
+
+                }
+                if (!adults || !children) {
+                    pay += "<h3 id='name' style='color:gray;font-size:17px'>Extra Child: ";
+                    pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert; margin-left: -3px'>";
+                    pay += info.cost_per_person * 0.2 * (1 - (info.Discount / 100));
+                    pay += "</i>";
+                    pay += "<br></h3></h3>";
+                }
+                else {
+                    pay += "<h3 id='name' style='color:gray;font-size:17px'>" + children + "Child: ";
+                    pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert; margin-left: -3px'>";
+                    pay += info.cost_per_person * 0.2 * children * (1 - (info.Discount / 100));
+                    pay += "</i>";
+                    pay += "<br></h3></h3>";
+
+                }
+                if (!adults || !children) {
+                    pay += "<h3 id='name' style='color:gray;font-size:23px;'>Total:  ";
+                    pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert; margin-left: -3px'>";
+                    pay += info.cost_per_person + "+" + 0.18 * info.cost_per_person + "(tax)";
+                    pay += "</i></h3>";
+                }
+                else {
+                    pay += "<h3 id='name' style='color:gray;font-size:23px;'>Total:  ";
+                    pay += "<i class='fa fa-rupee' style='color:#fa9e1b; font-size: revert; margin-left: -3px'>";
+                    pay += info.cost_per_person + "+" + 0.18 * info.cost_per_person + "(tax)";
+                    pay += "</i></h3>";
+
+                }
+                pay += "<label style='color:gery'><b>Apply Coupon?</b> </label>";
+                pay += "<br>";
+                pay += "<input type='text' id='coup' name='coup' size='80' placeholder='seasonal discounts' style='width: 240px; height: 30px'>"
+                pay += "<div class='button book_button' style='top:-1.5vw;margin-left:34px;'>";
+
+                pay += " <a href='#' id='Payresult' name='Payresult' value = 'Pay Now' onclick='table(" + info.id + ")'>Pay Now<span></span><span></span><span></span></a > ";
+
+                pay += "</div></div>";
+
 
             }
 
 
             d.innerHTML = trips;
+            d2.innerHTML = pay;
 
         }
 
@@ -1370,7 +1525,7 @@
                 var info = data[i].data();
                 console.log(i);
                 console.log("hi", info);
-                hotels += "<div id='offers_grid' class='offers_grid'>";
+                hotels += "<div id='offers_grid' class='offers_grid' style='margin-top:80px;'>";
                 hotels += "<div style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: 300px;padding: 10px;box-shadow: 5px 10px 18px #888888;'>"; //div2
                 hotels += "<div class='offers_item rating_4'style='color: black'>";
                 hotels += "<div class='row'>";
@@ -1428,7 +1583,7 @@
                 //console.log(data[i].data.activity.day1.activity1);
                 //console.log(inf.day1.Activity1, inf.day1.image1);
 
-                act += "<div id='offers_grid' class='offers_grid' style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: min-content;padding: 10px;box-shadow: 5px 10px 18px #888888;' ><br>";
+                act += "<div id='offers_grid' class='offers_grid' style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: max-content;padding: 10px;box-shadow: 5px 10px 18px #888888;' ><br>";
                 act += " <ul style='margin-left:10px solid black;'>";
                 var k = 1;
                 var today = new Date();
@@ -1465,12 +1620,22 @@
                                     act += "<h3 font-weight:bolder;font-size:36px;> Day " + (k1 - 31) + "-" + ((k1 - 31) + 2) + "</h3>";
                                 }
                             }
+                            else if (k1 > 30 && (k2 in ["4", "6", "9", "11"])) {
+                                console.log("K" + k1 - 31);
+                                act += "<h3 font-weight:bolder;font-size:36px;> Day " + (k1 - 31) + "-" + ((k1 - 31) + 2) + "</h3>";
+                            }
+                            else {
+                                console.log("K" + k);
+                                act += "<h3 font-weight:bolder;font-size:36px;> Day " + (k * 2 + parseInt(trip_in.slice(-2, trip_in.length))) + "-" + (k * 2 + 2 + parseInt(trip_in.slice(-2, trip_in.length))) + "</h3>";
+                            }
+
 
                         }
+                        /*
                         else if (k1 > 30 && (k2 in ["4", "6", "9", "11"])) {
                             console.log("K" + k1 - 31);
                             act += "<h3 font-weight:bolder;font-size:36px;> Day " + (k1 - 31) + "-" + ((k1 - 31) + 2) + "</h3>";
-                        }
+                        }*/
                         else if (!trip_in) {
                             console.log("K" + k);
                             act += "<h3 font-weight:bolder;font-size:36px;> Day " + k * 2 + "-" + (k * 2 + 2) + "</h3>";
@@ -1513,12 +1678,22 @@
                                     act += "<h3 font-weight:bolder;font-size:36px;> Day " + (k1 - 31) + "</h3>";
                                 }
                             }
+                            else if (k1 > 30 && (k2 in ["4", "6", "9", "11"])) {
+                                console.log("K" + k1 - 31);
+                                act += "<h3 font-weight:bolder;font-size:36px;> Day " + (k1 - 31) + "</h3>";
+                            }
+                            else {
+                                console.log("K" + k);
+                                act += "<h3 font-weight:bolder;font-size:36px;> Day " + (k + parseInt(trip_in.slice(-2, trip_in.length))) + "</h3>";
+                            }
 
                         }
+                        /*
                         else if (k1 > 30 && (k2 in ["4", "6", "9", "11"])) {
                             console.log("K" + k1 - 31);
                             act += "<h3 font-weight:bolder;font-size:36px;> Day " + (k1 - 31) + "</h3>";
                         }
+                        */
                         else if (!trip_in) {
                             console.log("K" + k);
                             act += "<h3 font-weight:bolder;font-size:36px;> Day " + k + "</h3>";
@@ -1548,8 +1723,51 @@
             act += " </div>";
             act += "</ul>";
             act += "</div>";
+            act += "</div>";
+
+            var details = "";
+            console.log("Im in form");
+            var d1 = document.createElement("div");
+            document.getElementById("results2").appendChild(d1);
+
+            var db = firebase.firestore();
+
+            details += "<div id='offers_grid2' class='offers_grid' style='border:1px solid rgba(158, 158, 158, 0.712); border-radius: 12px; height: max-content; padding: 10px; top:-2vw; box-shadow: 5px 10px 18px #888888;display: inline-block; float:left; margin-right: 10px;' >";
+            details += " <ul style='margin-left:10px solid black;'>";
+            details += "<h2 id='name' style='color:grey' ><b>";
+            details += "<b>Traveler Information</b>"
+            details += "<br></h2>";
+            //details += "<label style='color:black; font-size:25px; font-family:Serif' >I'm looking for </label>"
+            //details += "<br></b>";
+            //details += "<input type='radio' id='me'  value='me' required>"
+            //details += "<label  style='color:grey; font-size:20px;'> Myself </label>"
+            //details += "<br>";
+            //details += "<input type='radio' id='other'  value='other'>"
+            //details += "<label  style='color:grey; font-size:20px;'>Somebody Else</label>"
+            //details += "<br><br>";
+            details += "<label style='color:black; font-size:25px; float:left;  margin-top:4mm; margin-right:8mm; margin-left:1mm; font-family:Serif'><b>First Name:  </b> </label>"
+            details += "<br>";
+            details += "<input type='text' id='fname' name='firstname' size='80' margin-right: -3px placeholder='First name as in passport' required style='width: 280px; height: 35px'>"
+            details += "<br>";
+            details += "<label style='color:black; font-size:25px; float:left;  margin-top:4mm; margin-right:10mm; margin-left:-42mm; font-family:Serif'><b>Last Name:  </b> </label>"
+            details += "<br>";
+            details += "<input type='text' id='lname' name='lastname' size='80' placeholder='Last name as in passport' required style='width: 280px; height: 35px'>"
+            details += "<br>";
+            details += "<label style='color:black; font-size:25px; float:left;  margin-top:5mm; margin-right:17mm; margin-left:-43mm;  font-family:Serif; '><b>Email-id:  </b> </label>"
+            details += "<br>";
+            details += "<input type='email' id='em' name='em' size='80' placeholder='Your email' required style='width: 280px; height: 35px'>"
+            details += "<br>";
+            details += "<label style='color:black; font-size:25px; float:left;  margin-top:3mm; margin-right:10mm; margin-left:-44mm;  font-family:Serif'><b>Contact No:  </b> </label>"
+            details += "<br>";
+            details += "<input type='tel' id='tel' name='tel' size='80' placeholder='Your contact number' required style='width: 280px; height: 30px'>";
+            details += " </div>";
+            details += "</ul>";
+            details += "</div></div>";
 
             d.innerHTML = act;
+            d.innerHTML += details;
+
+
         }
 
 
