@@ -1,6 +1,8 @@
 # Mini-Project
 
 INTRODUCTION
+
+
 Until a person breaks from the dull routine, physically and mentally, he cannot find satisfaction; travelling helps us to achieve this break and rejuvenates us. At a new place, one is curious to know and eager to gather information. He/she gets thrills and surprises that keep his interests alive. Travelling is absorbing, educative and refreshing for the mind and the body.
 The travel industry, therefore, refers to the numerous aspects of the wider service industry which cater for the needs and desires of those who have travelled from one part of the world to another. Some of the wider sectors in travelling industry are: Transportation, Accommodation, Food & Beverage, Entertainment, Financial services, Travel agents etc
 The travel & tourism industry continues to grow at a rate that is faster than world GDP. Worldwide overnight tourist arrivals now exceed 1.2 billion, an increase of nearly 25% over the past five years. Over that same time period, the total annual economic impact of travel has grown to $7.2tn. Growth has been fuelled by new destinations, technology, improved transport networks, and a growing middle class in emerging markets.
@@ -11,11 +13,19 @@ Tourism management is a multidisciplinary field that includes all activities rel
 In this project, we work with 3 prominent areas in tourism industry. In the project, we have included Hotels, to provide accommodation for tourists, car rentals to provide ease of travel (renting cars), and trips to provide an overall package.  The website provides different options to user to choose from. The user can search for required service, and also sort according to different parameters. After finding the relevant service/package, user can view more details about the required package/service, fill details and book the item.
 
 PURPOSE:
+
+
 The purpose of the project is to make a convenient, user-friendly website that provides an all-in-one booking functionality for hotels, car rentals and trips. We also aim to provide a variety of options for the user, and also make it easy to search for a required package, and sort according to their needs as well as making the trips affordable by providing discounts, and coupons wherever applicable. The project has a lot of future scope where we can try to incorporate machine learning to help user recommendations, as well as dynamic pricing
 
 DESCRIPTION OF MODULES:
+
+
 We have used a lot of functions in the project. Some of the main modules/functions implemented in the project:
+
+
 A.LOGIN:
+
+
 Functions present in auth.js:
 1.	signup():  Signup function is used for registering a new user, The method used for authentication is traditional email password. The values are taken/retrieved from signup form(modal) and password and email are set in Users table in firestore
 2.	login():Providing authentication to user by checking email and password entered. 
@@ -24,6 +34,8 @@ Functions present in auth.js:
 
 
 B. MAIN PAGES (HOTELS, CAR RENTALS, TRIPS):
+
+
 Slightly different functions used in all pages, some of the major ones shown:
 1.	readall():Reads all the records of a particular collection (Trips ,Car rentals ,Hotels),retrieves from database and passes to getinfo for printing the desired information.
 2.	search():It takes /retrieves value from search form and passes to search_res(). Searches for a particular record in the collection and retrieves related results, Passes to getinfo for printing results. (Note: search_res retrieves records, and it is called within search)
@@ -38,6 +50,8 @@ A few of the functions:
 For different filtering, different functions are implemented.
 
 C.BOOKING RELATED:
+
+
 Booking: This function, gets called on clicking the book button in the search page. The id of the element getting searched Is passed to the function, and it opens a detailed view of the object getting searched for. For example, when user sees multiple results and clicks on book button of a particular hotel, car or trip, the in detail booking page is shown. This function receives id of an element, and passes to getinfo2
 1.	getinfo2(): Function used for displaying details of the booking page. Similar to getinfo functions, but shows additional details.
 2.	cart(): Related to adding function to cart.it stores the value in local storage.
