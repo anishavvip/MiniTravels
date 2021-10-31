@@ -9,6 +9,8 @@ The travel & tourism industry continues to grow at a rate that is faster than wo
 In the project, we also attempt to make a travel website, providing booking functionality to users
 
 SCOPE:
+
+
 Tourism management is a multidisciplinary field that includes all activities related to the tourism and hospitality industries. It itself comprises a number of different sectors such as transportation, hospitality, accommodation, trip planning, entertainment etc.
 In this project, we work with 3 prominent areas in tourism industry. In the project, we have included Hotels, to provide accommodation for tourists, car rentals to provide ease of travel (renting cars), and trips to provide an overall package.  The website provides different options to user to choose from. The user can search for required service, and also sort according to different parameters. After finding the relevant service/package, user can view more details about the required package/service, fill details and book the item.
 
@@ -42,7 +44,11 @@ Slightly different functions used in all pages, some of the major ones shown:
 3.	getinfo(), getinfo1(),getinfo2() : These functions are related to printing/displaying the data provided to them by other functions. The formatting of different elements is also done within these functions.(As in html, css styling)
 4.	del_ele(): Before displaying new results on screen, the older elements have to be deleted. This is done through del_ele.
 5.	Searching, Filtering, Sorting functions:
+
+
 In all three main pages, a number of functions are used for searching and filtering. These functions are used to filter according to a desired criterion. They are called on click of the element in dropdown, and retrieve records according to a criterion of these functions:
+
+
 A few of the functions:
 1.	ascsortprice()   sorts in ascending order according to price.
 2.	range3_5_seats: searching cars where seats in between 3 to 5
