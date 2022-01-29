@@ -30,7 +30,7 @@ The purpose of the project is to make a convenient, user-friendly website that p
 We have used a lot of functions in the project. Some of the main modules/functions implemented in the project:
 
 
-### A.LOGIN:
+### A.LOGIN
 
 
 Functions present in auth.js:
@@ -40,7 +40,7 @@ Functions present in auth.js:
 4.	modify():When user logs out or logs in, It does the required change in display. As, when user logs in, the screen shows user name and logout button. And when user is logged out, shows login and register button.
 
 
-### B. MAIN PAGES (HOTELS, CAR RENTALS, TRIPS):
+### B. MAIN PAGES (HOTELS, CAR RENTALS, TRIPS)
 
 
 Slightly different functions used in all pages, some of the major ones shown:
@@ -60,7 +60,7 @@ A few of the functions:
 3.	nights_3to7: Trips where nights are between 3 to 7 etc
 For different filtering, different functions are implemented.
 
-### C.BOOKING RELATED:
+### C.BOOKING RELATED
 
 
 Booking: This function, gets called on clicking the book button in the search page. The id of the element getting searched Is passed to the function, and it opens a detailed view of the object getting searched for. For example, when user sees multiple results and clicks on book button of a particular hotel, car or trip, the in detail booking page is shown. This function receives id of an element, and passes to getinfo2
