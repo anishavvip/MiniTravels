@@ -5,7 +5,7 @@ https://user-images.githubusercontent.com/85858695/145779318-db5f2322-a60c-444c-
 
 
 
-INTRODUCTION
+# INTRODUCTION
 
 
 Until a person breaks from the dull routine, physically and mentally, he cannot find satisfaction; travelling helps us to achieve this break and rejuvenates us. At a new place, one is curious to know and eager to gather information. He/she gets thrills and surprises that keep his interests alive. Travelling is absorbing, educative and refreshing for the mind and the body.
@@ -13,24 +13,24 @@ The travel industry, therefore, refers to the numerous aspects of the wider serv
 The travel & tourism industry continues to grow at a rate that is faster than world GDP. Worldwide overnight tourist arrivals now exceed 1.2 billion, an increase of nearly 25% over the past five years. Over that same time period, the total annual economic impact of travel has grown to $7.2tn. Growth has been fuelled by new destinations, technology, improved transport networks, and a growing middle class in emerging markets.
 In the project, we also attempt to make a travel website, providing booking functionality to users
 
-SCOPE:
+# SCOPE
 
 
 Tourism management is a multidisciplinary field that includes all activities related to the tourism and hospitality industries. It itself comprises a number of different sectors such as transportation, hospitality, accommodation, trip planning, entertainment etc.
 In this project, we work with 3 prominent areas in tourism industry. In the project, we have included Hotels, to provide accommodation for tourists, car rentals to provide ease of travel (renting cars), and trips to provide an overall package.  The website provides different options to user to choose from. The user can search for required service, and also sort according to different parameters. After finding the relevant service/package, user can view more details about the required package/service, fill details and book the item.
 
-PURPOSE:
+# PURPOSE
 
 
 The purpose of the project is to make a convenient, user-friendly website that provides an all-in-one booking functionality for hotels, car rentals and trips. We also aim to provide a variety of options for the user, and also make it easy to search for a required package, and sort according to their needs as well as making the trips affordable by providing discounts, and coupons wherever applicable. The project has a lot of future scope where we can try to incorporate machine learning to help user recommendations, as well as dynamic pricing
 
-DESCRIPTION OF MODULES:
+# DESCRIPTION OF MODULES:
 
 
 We have used a lot of functions in the project. Some of the main modules/functions implemented in the project:
 
 
-A.LOGIN:
+## A.LOGIN:
 
 
 Functions present in auth.js:
@@ -40,7 +40,7 @@ Functions present in auth.js:
 4.	modify():When user logs out or logs in, It does the required change in display. As, when user logs in, the screen shows user name and logout button. And when user is logged out, shows login and register button.
 
 
-B. MAIN PAGES (HOTELS, CAR RENTALS, TRIPS):
+## B. MAIN PAGES (HOTELS, CAR RENTALS, TRIPS):
 
 
 Slightly different functions used in all pages, some of the major ones shown:
@@ -60,7 +60,7 @@ A few of the functions:
 3.	nights_3to7: Trips where nights are between 3 to 7 etc
 For different filtering, different functions are implemented.
 
-C.BOOKING RELATED:
+## C.BOOKING RELATED:
 
 
 Booking: This function, gets called on clicking the book button in the search page. The id of the element getting searched Is passed to the function, and it opens a detailed view of the object getting searched for. For example, when user sees multiple results and clicks on book button of a particular hotel, car or trip, the in detail booking page is shown. This function receives id of an element, and passes to getinfo2
