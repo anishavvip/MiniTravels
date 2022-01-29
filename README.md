@@ -1,4 +1,4 @@
-# Mini-Project
+# Mini-Travels
 
 
 https://user-images.githubusercontent.com/85858695/145779318-db5f2322-a60c-444c-8149-8acf748365f6.mp4
